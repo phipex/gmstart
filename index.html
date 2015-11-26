@@ -1,751 +1,475 @@
 <!DOCTYPE html>
-<html class="no-js" >
-<head lang="es">
+<html lang="en" ng-app="gasmarket">
+<head>
     <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-  <title>GasMarket</title>
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!--<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />-->
-  <!--<link rel="stylesheet" href="../bower_components/select2-ng/select2.css"/>-->
-
-  <!-- build:css styles/vendorindex.css -->
+    <title></title>
+  <!-- build:css styles/vendorstart.css -->
   <!-- bower:css -->
 
   <link rel="stylesheet" href="styles/bootstrap-flatly2.min.css"/>
-  <link href="../bower_components/select2-dist/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
   <!-- endbower -->
   <!-- endbuild -->
-
-
 
   <!-- build:css styles/mainindex.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="styles/index.css">
-
+  <!-- endbower -->
   <!-- endbuild -->
-
-
 
   <!-- build:js scripts/vendor/modernizr.js -->
   <script src="../bower_components/modernizr/modernizr.js"></script>
   <!-- endbuild -->
+
+
+  <style>
+    @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+    #menu h1:before{
+      content: "// ";
+    }
+    #menu h1{
+      font-size:3em;
+      color:#fefefe;
+      text-transform:lowercase;
+    }
+    .wrapper{
+     /* margin:3em 0;*/
+    }
+    #menu a,#menu a:visited,#menu a:hover,#menu a:active{
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      position:relative;
+      transition:0.5s color ease;
+      text-decoration:none;
+      /*color:rgba(52, 152, 219, 0.43);*/
+      font-size:2em;
+
+    }
+    #menu a:hover{
+      color:#d73444;
+    }
+    a.before:before,a.after:after{
+      content: "";
+      transition:0.5s all ease;
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      position:absolute;
+    }
+    a.before:before{
+      top:-0.25em;
+    }
+    a.after:after{
+      bottom:-0.25em;
+    }
+    a.before:before,a.after:after{
+      height:5px;
+      height:0.35rem;
+      width:0;
+      background:#d73444;
+    }
+    a.first:after{
+      left:0;
+    }
+    a.second:after{
+      right:0;
+    }
+    a.third:after,a.sixth:before,a.sixth:after{
+      left:50%;
+      -webkit-transform:translateX(-50%);
+      transform:translateX(-50%);
+    }
+    a.fourth:before,a.fourth:after{
+      left:0;
+    }
+    a.fifth:before,a.fifth:after{
+      right:0;
+    }
+    a.seventh:before{
+      right:0;
+    }
+    a.seventh:after{
+      left:0;
+    }
+    a.eigth:before{
+      left:0;
+    }
+    a.eigth:after{
+      right:0;
+    }
+    a.before:hover:before,a.after:hover:after{
+      width:100%;
+    }
+    .square{
+      box-sizing:border-box;
+      margin-left:-0.4em;
+      position:relative;
+      font-size:2.5em;
+      overflow:hidden;
+    }
+    .square a{
+      position:static;
+      font-size:100%;
+      padding:0.2em 0.4em;
+    }
+    .square:before,.square:after{
+      content: "";
+      box-sizing:border-box;
+      transition:0.25s all ease;
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      position:absolute;
+      width:5px;
+      width:0.35rem;
+      height:0;
+      background:#d73444;
+    }
+    .square:before{
+      left:0;
+      bottom:-0.2em;
+    }
+    .square.individual:before{
+      transition-delay:0.6s;
+    }
+    .square:after{
+      right:0;
+      top:-0.2em;
+    }
+    .square.individual:after{
+      transition-delay:0.2s;
+    }
+    .square a:before{
+      left:0;
+      transition:0.25s all ease;
+    }
+    .square a:after{
+      right:0;
+      transition:0.25s all ease;
+    }
+    .square.individual a:after{
+      transition:0.25s all ease 0.4s;
+    }
+    .square:hover:before,.square:hover:after{
+      height:calc(100% + 0.4em);
+    }
+    .square:hover a:before,.square:hover a:after{
+      width:100%;
+    }
+
+    /*/ /*/
+    .content{
+      padding: 15px;
+    }
+
+    #ubcImg{
+      width: 20%;
+    }
+
+    .header {
+      color: #36A0FF;
+      font-size: 27px;
+      padding: 10px;
+    }
+
+    .bigicon {
+      font-size: 35px;
+      color: #36A0FF;
+    }
+
+    .msgUderConst,.msgUderConst h2{
+      display: inline;
+    }
+
+
+  </style>
 </head>
 <body>
 <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 <header class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
       <a class="navbar-brand" href="#">
         <img src="images/logo_gisco.png">
         <img src="images/estaciones-de-servcio.png" style="height: 55px">
       </a>
+      <div class="navbar-collapse collapse">
+        <div class="navbar-form navbar-right">
+          <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+        </div>
+      </div>
     </div>
+
     <div class="navbar-collapse collapse">
       <div class="navbar-form navbar-right">
-        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+        <strong>Visor de Estaciones</strong>
+
+        <!--<div class="form-group">
+            <input type="text" id="quick_search" class="form-control" placeholder="Quick Search">
+
+        </div>-->
       </div>
-    </div>
-
+    </div><!--/.navbar-collapse -->
   </div>
-
-
 </header>
-<div class="centrar" id="cargando">
-  <h3>...Cargando, espere un momento por favor...</h3>
-
-  <br/>
-
-  <div id="barProgresLoading" class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span>
+<div ng-controller="starpage">
+  <div ng-if="isIE"><div class="panel panel-danger" >
+    <div class="panel-heading">
+      <h3 class="panel-title">Atención</h3>
     </div>
-  </div>
+    <div class="panel-body">
+      Esta aplicación esta optimizada para <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a> y <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>, en otros navegadores (en especial Internet Explorer) puede presentar problemas los cuales no permitirían la correcta visualización de la información, por lo anterior recomendamos usar estos navegadores para el uso exitoso de esta aplicación.
+    </div>
+  </div></div>
 
-</div>
-
-<div class="container-fluid">
-
-  <div class="row">
-    <div class="row-same-height row-full-height">
-      <div id="panelData" class="col-md-4 hidden  col-top col-xs-height col-full-height">
-        <button id="btnShowFilter" type="button" class="btn btn-primary centrar">
-          Mostrar Filtros
-        </button>
-
-        <div id="datailContent">
+  <div class="container">
 
 
+      <div id="menu" class="col-xs-4 panel-bot-up">
+        <div class="wrapper">
+          <a class="first after" href="#" ng-click="prueb(0)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> GasMarket</a>
         </div>
-
+        <div class="wrapper">
+          <a class="first after" href="#" ng-click="prueb(4)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Optimice sus centros alternos</a>
+        </div>
+        <div class="wrapper">
+          <a class="first after" href="#" ng-click="prueb(1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Quienes Somos</a>
+        </div>
+        <div class="wrapper">
+          <a class="first after" href="#" ng-click="prueb(2)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Convenios</a>
+        </div>
+        <div class="wrapper">
+          <a class="first after" href="#" ng-clic="prueb(3)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Contacto</a>
+        </div>
       </div>
-      <div id="panelFilter" class="col-md-4 col-top col-xs-height col-full-height">
+      <div class="col-xs-8 panel-bot-up todoAlto">
+       <!--<div class="msgUderConst">
+         <h2>Sitio en construccion</h2>
+        <img id="ubcImg" src="images/Under_construction.jpg" alt="Sitio en contruccion"/>
+       </div>-->
+        <div class="content panel panel-default" ng-show="listview[0]">
+          <h3>¿Que es GasMarket?</h3>
 
-        <div class="centrar">
-          <button type="button" class="btn btn-primary btn-lg centrar" data-toggle="modal" data-target="#myModal">
-            Cargar Departamentos (<span id="numDptoLoad">0</span>/<span id="numDptoTotal">0</span>)
-          </button>
+          Plataforma Web, donde podemos encontrar información de  EDS a nivel nacional , facilitando ubicaciones exactas (latitud y longitud ) , fotos satélite, fotos tierra y fotos físicas a demás de un inventario detallado de EDS
+
+          <div>
+            <h3>¿Para que la Georeferenciacion?</h3>
+            <img src="images/B5_Georeference_240x240.jpg"  class="img-responsive img-rounded" alt="Georeferenciacion"/>
+            <br/>
+            La competencia y los niveles de servicio que deben afrontar las EDS hacen que sea necesario  incrementar la rentabilidad por metro cuadrado, siendo necesario generar estrategias que permitan identificar y disponer de un inventario oportuno para la búsqueda de oportunidades de uso y rentabilización de los centros alternos en cada EDS.
+
+          </div>
+
+
         </div>
-        </br>
-        <div class="form-group input-group">
-          <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
-          <input id="quick_search" type="text" class="form-control input-lg" placeholder="Busqueda Rapida">
+        <div class="content panel panel-default" ng-show="listview[1]">
+          <h3>CAB </h3>
+          (Comercializadora y Asesoria Bermudez) Somos una compañía innovadora con mas  20  años en el sector de hidrocarburos, desarrollando estrategias de optimización y reingenierías a nivel nacional para todo el sector de las Estaciones de Servicio del país.
+
+          <h3>Gisco</h3>
+          Es una compañia especializada en el desarrollo de cartografia, GPS, drones y aplicaciones relacionadas con estos temas.
+
+          El proposito es permitirle a nuestros usuarios tener la informacion disponible, actualizada y veraz en la nube.
+        </div>
+        <div class="content panel panel-default" ng-show="listview[2]">
 
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">Filtros</div>
-          <div class="panel-body">
-            <div role="tabpanel">
+        <div class="content panel panel-default" ng-show="listview[3]">
+          <legend class="text-center header">Contactenos</legend>
+          <div class="row">
+            <div class="col-md-4">
+              <address>
+                <strong>Jorge Ivan Bermudez Ramirez</strong><br>
+                <a href="mailto:jbtexmo@hotmail.com">jbtexmo@hotmail.com</a><br>
+                <a href="tel:3105776556">310 577 65 56</a><br>
+                <a href="callto:jorge.ivan.bermudez.cab">Skype:jorge.ivan.bermudez.cab</a>
 
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                  <a href="#home" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> Datos</a>
-                </li>
-                <li role="presentation">
-                  <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-edit" ></span> Espacial</a>
-                </li>
-
-              </ul>
-
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in  active" id="home">
-                  </br>
-                 <div class="alert alert-info" role="alert">
-                   <div class="noFiltroSeleccionado" id="dataNoFiltro">No ha seleccionado un filtro</div>
-                    <div class="noFiltroSeleccionado" id="dataFiltro"><strong>Se filtrara por:</strong></div>
-                    <div class="filtroSelec" id="lblFilSelecNombre"></div>
-                    <div class="filtroSelec" id="lblFilSelecDepartamentoCiudad"></div>
-                    <div class="filtroSelec" id="lblFilSelecCertificador"></div>
-                    <div class="filtroSelec" id="lblFilSelecProvedor1"></div>
-                    <div class="filtroSelec" id="lblFilSelecProvedor2"></div>
-                    <div class="filtroSelec" id="lblFilSelecMayorista"></div>
-                    <div class="filtroSelec" id="lblFilSelecOperador"></div>
-                    <div class="filtroSelec" id="lblFilInputVconFrom"></div>
-                    <div class="filtroSelec" id="lblFilInputVconTo"></div>
-                    <div class="filtroSelec" id="lblFilServ"></div>
-                    <div class="filtroSelec" id="lblFilUbicad"></div>
-                 </div>
-                  </br>
-
-                  <div class="centrar">
-                    <div id="btnFiltrar" class="btn btn-default btnFiltrar"><span class="glyphicon glyphicon-filter" /> Filtrar</div>
-                    <div id="btnLimpiar" class="btn btn-default btnLimpiar"><span class="glyphicon glyphicon-trash" /> Limpiar</div>
-                  </div>
-                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              </address>
+            </div>
+            <div class="col-md-8">
+              <form class="form-horizontal" method="post">
+                <fieldset>
 
 
-                    </br>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingNom">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNom"
-                               aria-expanded="true" aria-controls="collapseNom">
-                              Por Nombre
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseNom" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingNom">
-                          <div class="panel-body">
-
-                            <div>
-                              Digite un termino a buscar
-                              <select id="selectNombreTermino" data-tags="true"
-                                      data-placeholder="Digite un termino a buscar" data-optpar="selectNombreLista"
-                                      data-lbfilval="lblFilSelecNombre" data-elemento="Nombre" class="selectDivPol"
-                                      style="width: 75%" data-prop="nom">
-                                <option value=""></option>
-                              </select>
-                              <br>ó Seleccione un nombre de la lista</br>
-                              <select multiple id="selectNombreLista" data-placeholder="Seleccion un nombre"
-                                      data-optpar="selectNombreTermino" data-lbfilval="lblFilSelecNombre"
-                                      data-elemento="Nombre" class="selectDivPol"
-                                      style="width: 75%" data-prop="nom">
-                                <option value=""></option>
-                              </select>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingCiudad">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCiudad" aria-expanded="false" aria-controls="collapseCiudad">
-                              Por Region
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseCiudad" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCiudad">
-                          <div class="panel-body">
-
-                            Seleccione un departamento
-                            <select multiple class="selectDivPol" id="selectDepartmentos" data-placeholder="Seleccion un departamento"
-                                    style="width: 75%" data-optpar="selectCiudad" data-elemento="Departamento"
-                                    data-lbfilval="lblFilSelecDepartamentoCiudad" data-prop="dep">
-                              <option value=""></option>
-                            </select>
-
-                            <br>o Seleccione directamente una ciudad</br>
-
-                            <select multiple class="selectDivPol" id="selectCiudad" data-placeholder="Seleccion una ciudad"
-                                    style="width: 75%" data-elemento="Ciudad" data-optpar="selectDepartmentos"
-                                    data-lbfilval="lblFilSelecDepartamentoCiudad" data-prop="cit">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingMay">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseMay" aria-expanded="false" aria-controls="collapseMay">
-                              Por Mayorista
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseMay" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMay">
-                          <div class="panel-body">
-                            <select multiple class="selectDivPol" id="selectCategoria" data-placeholder="Seleccion una Mayorista"
-                                    style="width: 75%" data-elemento="Mayorista"
-                                    data-lbfilval="lblFilSelecMayorista" data-prop="cat">
-                              <option value=""></option>
-                            </select>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingCer">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCer" aria-expanded="false" aria-controls="collapseCer">
-                              Por Certificador
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseCer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCer">
-                          <div class="panel-body">
-                            <select multiple class="selectDivPol" id="selectCertificador" data-placeholder="Seleccion un Certificador"
-                                    style="width: 75%" data-elemento="Certificador"
-                                    data-lbfilval="lblFilSelecCertificador" data-prop="cer">
-                              <option value=""></option>
-                            </select>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOpe">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOpe" aria-expanded="false" aria-controls="collapseOpe">
-                              Por Operador
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseOpe" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCer">
-                          <div class="panel-body">
-                            <select multiple class="selectDivPol" id="selectOperador" data-placeholder="Seleccion un Operador"
-                                    style="width: 75%" data-elemento="Operador"
-                                    data-lbfilval="lblFilSelecOperador" data-prop="mar">
-                              <option value=""></option>
-                            </select>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingPrv">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapsePrv" aria-expanded="false" aria-controls="collapsePrv">
-                              Por Provedor
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapsePrv" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrv">
-                          <div class="panel-body">
-                            <br>Provedor 1</br>
-                            <select multiple class="selectDivPol" id="selectProvedor1" data-placeholder="Seleccion un Provedor 1"
-                                    style="width: 75%" data-elemento="Provedor_1"
-                                    data-lbfilval="lblFilSelecProvedor1" data-prop="prv1">
-                              <option value=""></option>
-                            </select>
-                            <br>Provedor 2</br>
-                            <select multiple class="selectDivPol" id="selectProvedor2" data-placeholder="Seleccion un Provedor 2"
-                                    style="width: 75%" data-elemento="Provedor_2"
-                                    data-lbfilval="lblFilSelecProvedor2" data-prop="prv2">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingServ">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseServ" aria-expanded="false" aria-controls="collapseServ">
-                              Por Servicio
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseServ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServ">
-                          <div class="panel-body">
-
-                            <div class="btn-group btn-group-vertical" role="group" aria-label="..." data-toggle="buttons">
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="was" value="Lavado">Lavado
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="rcar" value="Taller">Taller
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="oil" value="Cambio Aceite">Cambio Aceite
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="ins" value="Seguros">Seguros
-                              </label>
-
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="hot" value="Hotel">Hotel
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="res" value="Restaurante">Restaurante
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="gro" value="Mercado">Mercado
-                              </label>
-
-                            </div>
-                            <div class="btn-group btn-group-vertical" role="group" aria-label="..." data-toggle="buttons">
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="smon" value="Envio Divisas">Envio Divisas
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="atm" value="Cajero Aut.">Cajero Aut.
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="gym" value="Gimnasio">Gimnasio
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="ffo" value="Comida Rapida">Comida Rapida
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="scel" value="Venta Celulares">Venta Celulares
-                              </label>
-
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="trep" value="Montallantas">Montallantas
-                              </label>
-                              <label class="btn btn-default inputWalls">
-                                <input type="checkbox" name="inputWalls" data-serv="par" value="Parqueadero">Parqueadero
-                              </label>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingVcon">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseVcon" aria-expanded="false" aria-controls="collapseVcon">
-                              Por Fecha de Vencimiento
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseVcon" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingVcon">
-                          <div class="panel-body">
-                            <div class="form-horizontal">
-                              <div class="form-group">
-                                <label for="vconDesde" class="col-sm-3 control-label">Fecha desde</label>
-
-                                <div class="col-sm-9">
-                                  <input id="vconDesde" class="form-control dateForm" name="vconDesde" type="date"
-                                         placeholder="yyyy-mm-dd" data-lbfilval="lblFilInputVconFrom" data-elemento="Fecha_desde">
-                                  <span class="input-group-addon">
-                                      <span class="glyphicon glyphicon-calendar"  ></span>
-                                  </span>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="vconHasta" class="col-sm-3 control-label">Fecha hasta</label>
-
-                                <div class="col-sm-9">
-                                  <input id="vconHasta" class="form-control  dateForm"  name="vconHasta" type="date" data-elemento="Fecha_hasta" data-lbfilval="lblFilInputVconTo" placeholder="yyyy-mm-dd"/>
-                                  <span class="input-group-addon">
-                                      <span class="glyphicon glyphicon-calendar"  ></span>
-                                  </span>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingUbic">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseUbic" aria-expanded="false" aria-controls="collapseUbic">
-                              Por ubicadas
-                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseUbic" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingUbic">
-                          <div class="panel-body">
-                            <div class="btn-group center" role="group" aria-label="..." data-toggle="buttons">
-                              <label class="btn btn-default ubicad active">
-                                <input type="checkbox" name="ubicad" value="Ubicadas" data-ubic="loc" checked="true">Ubicadas
-                              </label>
-                              <label class="btn btn-default ubicad active">
-                                <input type="checkbox" name="ubicad"  value="No Ubicadas" data-ubic=null checked="true">No Ubicadas
-                              </label>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="centrar">
-                    <div  class="btn btn-default btnFiltrar"><span class="glyphicon glyphicon-filter" /> Filtrar</div>
-                    <div  class="btn btn-default btnLimpiar"><span class="glyphicon glyphicon-trash" /> Limpiar</div>
-                  </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="profile">
-                  <div id="msgSpSearch"  class="centrar alert alert-info">No ha seleccionado un metodo de busqueda</div>
-                  <br/>
-                  <div class="btn-group  centrar center-block" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhPoligon">Poligono</button>
-                    <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhCirculo" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Circulo</button>
-
-                  </div>
-                  <br/>
-                  <div class="collapse" id="collapseExample">
-                    <div class="well">
-                      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                          <button type="button" class="btn btn-default radioSpSearch" data-radio="1">1 Km</button>
-
-                        </div>
-                        <div class="btn-group" role="group">
-                          <button type="button" class="btn btn-default radioSpSearch" data-radio="2">2 Km</button>
-
-                        </div>
-                        <div class="btn-group" role="group">
-                          <button type="button" class="btn btn-default radioSpSearch" data-radio="5">5 Km</button>
-
-                        </div>
-                        <div class="btn-group" role="group">
-                          <button type="button" class="btn btn-default radioSpSearch" data-radio="10">10 Km</button>
-                        </div>
-                      </div>
+                  <div class="form-group">
+                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                    <div class="col-md-8">
+                      <input id="fname" name="name" type="text" placeholder="Nombre" class="form-control" ng-model="mail.fname">
                     </div>
-                    <span id="radioCircle"></span>
-
-
                   </div>
-                  <br/>
-                  <div class="centrar">
-                    <button type="button" class="btn btn-default" id="btnSpSearch"><span class="glyphicon glyphicon-filter" /> Filtrar</button>
-                    <button type="button" class="btn btn-default" id="btnSpLimpiar" ><span class="glyphicon glyphicon-trash" /> Limpiar</button>
+                  <div class="form-group">
+                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                    <div class="col-md-8">
+                      <input id="lname" name="name" type="text" placeholder="Apellido" class="form-control" ng-model="mail.lname">
+                    </div>
                   </div>
-                </div>
 
-              </div>
+                  <div class="form-group">
+                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                    <div class="col-md-8">
+                      <input id="email" name="email" type="email" placeholder="Email" class="form-control" ng-model="mail.mail">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                    <div class="col-md-8">
+                      <input id="phone" name="phone" type="tel" placeholder="Telefono" class="form-control" ng-model="mail.phon">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                    <div class="col-md-8">
+                      <textarea class="form-control" id="message" name="message" placeholder="Introduzca su mensaje para nosotros aquí. Nos pondremos en contacto con usted dentro de 2 días hábiles." rows="7" ng-model="mail.msg"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-primary btn-lg" ng-click="mailto()">Enviar</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
 
             </div>
           </div>
+
+
         </div>
+        <div class="content panel panel-default" ng-show="listview[4]">
+          <h3>¿Cómo aumentar sus ganancias atrayendo más clientes a su estación de servicio, integrando y rentabilizando sus espacios no utilizados?</h3>
+          <p>Si su Estación de servicio y sus ingresos sólo dependen de la operación de combustible, usted tiene serios problemas y está corriendo grandes riesgos, porque cualquier situación problemática externa a usted lo podría dejar en grandes aprietos económicos.
+          </p>
+          <p>Usted puede hacer crecer su negocio aprovechando los espacios improductivos, ofreciendo otros servicios a través de centros alternos y al mismo tiempo, estos se encargarán de atraer a más clientes que le ayudarán a aumentar sus ingresos y sus ganancias
+          </p>
+          <p>Nunca antes había sido más fácil, lograr que su estación de servicio se vuelva un lugar de referencia y un punto de encuentro, donde sus clientes además de comprar combustible puedan disfrutar del tiempo con sus familias o amigos mientras esperan que se termine de lavar su auto, se realice un cambio de aceite o cualquier otro servicio que usted pueda ofrecer.
+          </p>
+          <p>Está aprobado que esto es posible si usted tiene otros lugares dentro de su estación, donde ellos puedan disfrutar de una deliciosa comida, y hacer diligencias importantes, como transacciones bancarias, compras de suministros, o envió de paquetes o dinero a otros lugares.
+          </p>
+          <p>No se quede atrás y haga parte HOY de este GRAN PROYECTO de crecimiento para su negocio, comunicándose  con nosotros  o al correo electrónico <a href="mailto:jbtexmo@hotmail.com">jbtexmo@hotmail.com</a>
+          </p>
+          <h3>¿Cómo Lograrlo?</h3>
+          <p>La forma más fácil es contar con socios estratégicos, y tener alianzas para el uso de sus espacios inhabilitados y centros alternos. Estos socios podrían ser:</p>
+         <ul>
+           <li>Cajeros Bancolombia,  Grupo  Aval.</li>
+          <li>Corresponsales Bancarios.Baloto, Efecty, Servientrega.</li>
+          <li>Antenas de comunicaciones Tigo, Movistar, Comcel, Golden Comunicaciones.</li>
+          <li>Proyecto de Vallas de publicidad.</li>
+          <li>Proveedores de diferentes productos generando descuento por compras en escala.</li>
+          <li>Franquicias como  Subway, El Corral, Presto, Droguerías, Minimercados, Gana, éxito, Euro, entre otras.</li>
+          <li>Proyecto de seguros corporativos con estrategias novedosas y negociación en Bloque  (Soat, Seguros de estaciones de servicios, seguros de vida, seguros de vehículos, seguros ambientas, entre otros.</li>
+          <li>Optimización de centros de lubricación, lavado, servitecas</li>
+          <li>Sodexho</li>
+         </ul>
 
-
-      </div>
-      <div id="panelMapList" class="col-xs-8 col-xs-height col-full-height ">
-        <div id="noObjetosEncontradosMsg" class="noObjetosListados alert alert-danger" role="alert">
-          <strong>No se encontraron datos con los parámetros de búsqueda</strong>
-          <br/>
-          <span>(Por favor remueva o cambie alguno de los filtros y repita nuevamente la búsqueda)</span>
-        </div>
-        <div id="objetosEncontrados" class="alert alert-success" role="alert">
-          <strong>Se han encontrado <span id="noEncontrados"></span> estaciones</strong>
-        </div>
-
-        <div class="tabbable panel panel-default todoAlto">
-          <ul class="nav nav-tabs  nav-justified">
-            <li class="active"><a href="#mapaTab" id="btnTabMap" data-toggle="tab"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> MAPA</a></li>
-            <li><a href="#tablaTab" data-toggle="tab"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> TABLA</a></li>
-
+          <h3>Estos le ayudarán a:</h3>
+          <ul>
+            <li>Tener un ingreso fijo mensual</li>
+            <li>Recuperar gastos que son obligatorios por los impuestos que se imponen.</li>
+            <li>Minimizar el impacto de los impuestos.</li>
+            <li>Minimizar costos de operación altos.</li>
+            <li>Ser una Estación de Servicio más segura y atractiva, generando más tranquilidad y confianza debido al flujo de clientes y a la iluminación adicional de los centros alternos
+            </li>
           </ul>
-          <div class="tab-content todoAlto ">
-            <div id="mapaTab" class="tab-pane todoAlto active">
+          <h3>Otros ya lo Están Haciendo con Enormes Resultados</h3>
+          <p>Las estaciones de servicio que han contado con nuestro apoyo y asesoría, han logrado obtener una mayor rentabilidad y crecimiento  que aquellas que están desaprovechando sus espacios no utilizados. Y usted sabe que dichos espacios le está costando dinero todos los días.
+          </p>
+          <p>Si usted decide hoy crear estas alianzas estratégicas, también podrá obtener:
+          </p>
+          <ul>
+            <li>Asesoría para tener la mejor optimización de los centros alternos (porque usted necesita saber cuáles son los centros alternos que necesita su estación de servicio)
+            </li>
+            <li>Asesoría con una empresa de mercado o directamente con el aliado interesado en su estación de servicio</li>
+          </ul>
+          <p>Todo esto sin más costos adicionales para usted.</p>
 
-
-              <input type="search" class="form-control" id="pac-input"  placeholder="Buscador de Lugares">
-
-
-              <div id="map" class="todoAlto"></div>
-            </div>
-            <div id="tablaTab" class="tab-pane todoAlto  overflow">
-              <div class="container-fluid todoAlto">
-                <div class="panel">
-
-
-
-                  <div  id="listaGas" >
-                    <div class="btn-group pull-right" role="group" aria-label="...">
-                      <button type="button" class="sort btn btn-default" data-sort="nom">Ordenar por Nombre</button>
-                      <button type="button" class="sort btn btn-default" data-sort="cit">por Ciudad</button>
-                      <button type="button" class="sort btn btn-default" data-sort="dep">por Departamente</button>
-                      <button type="button" class="sort btn btn-default" data-sort="cat">por Mayorista</button>
-                      <button type="button" id="btnDownload" class="btn btn-default" >Descargar</button>
-                    </div>
-                    <div class="pagination"></div>
-                    <ul class="list list-group">
-
-                    </ul>
-                  </div>
-
-                  <div class="noObjetosListados alert alert-danger" role="alert">
-                    <strong>No se encontraron datos con los parámetros de búsqueda</strong>
-                    <br/>
-                    <span>(Por favor remueva o cambie alguno de los filtros y repita nuevamente la búsqueda)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
 
         </div>
       </div>
 
 
-    </div>
   </div>
-
 </div>
 <footer>
   <p class="pull-right">&copy; Gisco 2014</p>
 </footer>
-<!-- Modal departamentos-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Seleccion Departmentos</h4>
-      </div>
-      <button id="btnLoadAll" class="btn btn-default">Descargar Todos</button>
-      <div id="contentDeptos" class="modal-body todoAlto overflow">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--- mensaje de finalizacion de carga de departamento-->
-<div class="modal fade" id="mensajes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="mensajesLabel">Aviso</h4>
-      </div>
-      <div id="contentMensajes" class="modal-body todoAlto overflow">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<script id="templateDepto" type="text/html">
-  <div id="apto{{DepartamentoSin}}" class="dptoSec margen">
-    <h4>{{Departamento}}</h4>
-    <span class="dptoSin">Sin descargar</span>
-    <button data-depto="{{Departamento}}" data-target="#apto{{DepartamentoSin}}" class="btn btn-default dptoBtnLoad dptoSin">Descargar</button>
-    <div class="dptoLoadEnd"><span class="dptoCount">0</span> Estaciones</div>
-    <div class="progress dpto dptoLoading">
-      <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-        <span class="sr-only">100% Complete</span>Cargando
-      </div>
-    </div>
-  </div>
-
-
-</script>
-<script id="templateDetail" type="text/html">
-
-  <div class="panel panel-default todoAncho">
-    <h3 >{{nom}}</h3>
-  </div>
-  <div class="tabla">
-
-
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Departamento:</div>
-      <div class="tablacolumna">{{dep}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Ciudad:</div>
-      <div class="tablacolumna"> {{cit}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Direccion:</div>
-      <div class="tablacolumna"> {{dir}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Mayorista:</div>
-      <div class="tablacolumna"> {{cat}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Operador:</div>
-      <div class="tablacolumna">{{mar}}</div>
-      <br/></div>
-
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Certificador:</div>
-      <div class="tablacolumna">{{cer}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Tel:</div>
-      <div class="tablacolumna">{{tel}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Vol:</div>
-      <div class="tablacolumna">{{vol}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Vencimiento:</div>
-      <div class="tablacolumna">{{vcon}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Provedor 1:</div>
-      <div class="tablacolumna"> {{prv1}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Provedor 2: </div>
-      <div class="tablacolumna"> {{prv2}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Email: </div>
-      <div class="tablacolumna"> {{eml}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Representante Legal: </div>
-      <div class="tablacolumna">{{rpl}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">
-        Lavado: <span data-if="{{was}}"></span><br/>
-        Taller: <span data-if="{{rcar}}"></span><br/>
-        Cambio Aceite: <span data-if="{{oil}}"></span><br/>
-        Seguro: <span data-if="{{ins}}"></span><br/>
-        Hotel: <span data-if="{{hot}}"></span><br/>
-        Restaurante: <span data-if="{{res}}"></span><br/>
-        Mercado: <span data-if="{{gro}}"></span><br/>
-      </div>
-      <div class="tablacolumna">
-        Envio Divisas<span data-if="{{smon}}"></span><br/>
-        Cajero: <span data-if="{{atm}}"></span><br/>
-        Gimnacio: <span data-if="{{gym}}"></span><br/>
-        Comida Rapida: <span data-if="{{ffo}}"></span><br/>
-        Vente Celulares: <span data-if="{{scel}}"></span><br/>
-        Montallantas: <span data-if="{{trep}}"></span><br/>
-        Parqueadero: <span data-if="{{par}}"></span><br/>
-      </div>
-    </div>
-
-
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Observaciones:  </div>
-      <div class="tablacolumna"> {{obs}}</div>
-      <br/></div>
-    <div class="tablafila panel panel-default">
-      <div class="tablacolumna">Revisado por:  </div>
-      <div class="tablacolumna"> {{rvp}}</div>
-      <br/></div>
-  </div>
-  <div>
-    <button class="btn btn-default  btnEdit">Editar</button>
-    <span class="id hidden">{{id}}</span>
-  </div>
-</script>
-
-<script id="templateGasItem" type="x-tmpl-listjs">
-      <li class="list-group-item">
-          <span class="loc hidden"></span>
-          <h3 class="nom"></h3>
-          (<span class="cat"></span>)<br/>
-          <button class="btn btn-dafault btnIrA">Ir</button>
-          <button class="btn btn-dafault btnEdit">Editar</button>
-          <span class="dep"></span>-<span class="cit"></span>(<span class="dir"></span>)
-          <span class="id hidden"></span>
-
-      </li>
-
-    </script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&libraries=drawing&libraries=places"></script>
-<!-- build:js scripts/vendorindex.js -->
-  <!-- bower:js -->
+<!-- build:js scripts/vendorstart.js -->
+<!-- bower:js -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
-<script src="../bower_components/list.js/dist/list.js" ></script>
-
-<script src="../bower_components/select2-dist/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script src="../bower_components/papaparse/papaparse.js"></script>
+<script src="../bower_components/angular/angular.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
+<script>
+  function isIE () {
+    navigator.sayswho= (function(){ var ua= navigator.userAgent, tem, M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; if(/trident/i.test(M[1])){ tem= /\brv[ :]+(\d+)/g.exec(ua) || []; return 'IE '+(tem[1] || ''); } if(M[1]=== 'Chrome'){ tem= ua.match(/\b(OPR|Edge)\/(\d+)/); if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera'); } M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?']; if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]); return M.join(' '); })();navigator.sayswho= (function(){ var ua= navigator.userAgent, tem, M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; if(/trident/i.test(M[1])){ tem= /\brv[ :]+(\d+)/g.exec(ua) || []; return 'IE '+(tem[1] || ''); } if(M[1]=== 'Chrome'){ tem= ua.match(/\b(OPR|Edge)\/(\d+)/); if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera'); } M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?']; if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]); return M.join(' '); })();
+    var myNav = navigator.sayswho;
+    var res = (myNav.indexOf('IE') != -1) ? true : false;
+    console.info(res);
+    return res;
+  }
 
 
+  angular.module('gasmarket', [])
+    .controller('starpage', ['$scope','$window', function($scope,$window) {
+      $scope.listview=[];
 
-<!-- build:js scripts/pluginsindex.js -->
+      $scope.showIndex = 0;
 
-<!-- bower:js -->
-<script src="scripts/vendor/jquery.toaster.js"></script>
+      $scope.mail = {
+        fname:null,
+        lname:null,
+        mail:null,
+        phon:null,
+        msg:null
+      };
+
+      function inicializar(){
+        var count = $(".content").length;
+        //console.info(count);
+
+        for (var i = 0; i < count; i++) {
+          $scope.listview.push(false);
+
+        }
+      }
+
+      inicializar();
+      $scope.listview[$scope.showIndex]=true;
+
+      $scope.prueb=function(index){
+        //console.info("$event",index);
+        $scope.listview[$scope.showIndex]=false;
+        $scope.showIndex = index;
+        $scope.listview[$scope.showIndex]=true;
+      };
+
+      $scope.mailto=function(){
+        //console.info($scope.mail);
+
+        var mail=$scope.mail,
+          body = "Nombre:"+mail.fname+" "+mail.lname +
+          " Tel:"+mail.phon + " <br/>"+mail.msg;
+        var link = "mailto:phipex@yahoo.com"
+          + "?subject=GasMarket "
+          + "&body=" + escape(body);
+
+        window.location.href = link;
+      }
 
 
-<script src="scripts/vendor/markerclusterer.js"></script>
-<script src="../bower_components/list.pagination.js/dist/list.pagination.js" ></script>
-<!-- endbower -->
-<!-- endbuild -->
-
-<!-- build:js scripts/mainindex.js -->
-<!-- bower:js -->
-<script src="scripts/index.js"></script>
-<script src="scripts/MdlDpto.js"></script>
-<script src="scripts/MdlList.js">  </script>
-<script src="scripts/MdlFilter.js"></script>
-<script src="scripts/MdlFilterShape.js"></script>
-<script src="scripts/MdlCluster.js"></script>
-<script src="scripts/ModuleGasMarket.js"></script>
-
-
-<!-- endbower -->
-<!-- endbuild -->
-
+      $scope.isIE = isIE();
+    }]);
+</script>
 </body>
 </html>
