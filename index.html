@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html class="no-js" >
+<head lang="es">
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+  <title>GasMarket</title>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!--<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />-->
+  <!--<link rel="stylesheet" href="../bower_components/select2-ng/select2.css"/>-->
+
+  <!-- build:css styles/vendorindex.css -->
+  <!-- bower:css -->
+
+  <link rel="stylesheet" href="styles/bootstrap-flatly2.min.css"/>
+  <link href="../bower_components/select2-dist/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+
+
+  <!-- build:css styles/mainindex.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- endbuild -->
+
+
+
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+<body>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<header class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo_gisco.png">
+        <img src="images/estaciones-de-servcio.png" style="height: 55px">
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <div class="navbar-form navbar-right">
+        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+      </div>
+    </div>
+
+  </div>
+
+
+</header>
+<div class="centrar" id="cargando">
+  <h3>...Cargando, espere un momento por favor...</h3>
+
+  <br/>
+
+  <div id="barProgresLoading" class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="row-same-height row-full-height">
+      <div id="panelData" class="col-md-4 hidden  col-top col-xs-height col-full-height">
+        <button id="btnShowFilter" type="button" class="btn btn-primary centrar">
+          Mostrar Filtros
+        </button>
+
+        <div id="datailContent">
+
+
+        </div>
+
+      </div>
+      <div id="panelFilter" class="col-md-4 col-top col-xs-height col-full-height">
+
+        <div class="centrar">
+          <button type="button" class="btn btn-primary btn-lg centrar" data-toggle="modal" data-target="#myModal">
+            Cargar Departamentos (<span id="numDptoLoad">0</span>/<span id="numDptoTotal">0</span>)
+          </button>
+        </div>
+        </br>
+        <div class="form-group input-group">
+          <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
+          <input id="quick_search" type="text" class="form-control input-lg" placeholder="Busqueda Rapida">
+
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Filtros</div>
+          <div class="panel-body">
+            <div role="tabpanel">
+
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#home" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> Datos</a>
+                </li>
+                <li role="presentation">
+                  <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-edit" ></span> Espacial</a>
+                </li>
+
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in  active" id="home">
+                  </br>
+                 <div class="alert alert-info" role="alert">
+                   <div class="noFiltroSeleccionado" id="dataNoFiltro">No ha seleccionado un filtro</div>
+                    <div class="noFiltroSeleccionado" id="dataFiltro"><strong>Se filtrara por:</strong></div>
+                    <div class="filtroSelec" id="lblFilSelecNombre"></div>
+                    <div class="filtroSelec" id="lblFilSelecDepartamentoCiudad"></div>
+                    <div class="filtroSelec" id="lblFilSelecCertificador"></div>
+                    <div class="filtroSelec" id="lblFilSelecProvedor1"></div>
+                    <div class="filtroSelec" id="lblFilSelecProvedor2"></div>
+                    <div class="filtroSelec" id="lblFilSelecMayorista"></div>
+                    <div class="filtroSelec" id="lblFilSelecOperador"></div>
+                    <div class="filtroSelec" id="lblFilInputVconFrom"></div>
+                    <div class="filtroSelec" id="lblFilInputVconTo"></div>
+                    <div class="filtroSelec" id="lblFilServ"></div>
+                    <div class="filtroSelec" id="lblFilUbicad"></div>
+                 </div>
+                  </br>
+
+                  <div class="centrar">
+                    <div id="btnFiltrar" class="btn btn-default btnFiltrar"><span class="glyphicon glyphicon-filter" /> Filtrar</div>
+                    <div id="btnLimpiar" class="btn btn-default btnLimpiar"><span class="glyphicon glyphicon-trash" /> Limpiar</div>
+                  </div>
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+                    </br>
+
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingNom">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNom"
+                               aria-expanded="true" aria-controls="collapseNom">
+                              Por Nombre
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseNom" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingNom">
+                          <div class="panel-body">
+
+                            <div>
+                              Digite un termino a buscar
+                              <select id="selectNombreTermino" data-tags="true"
+                                      data-placeholder="Digite un termino a buscar" data-optpar="selectNombreLista"
+                                      data-lbfilval="lblFilSelecNombre" data-elemento="Nombre" class="selectDivPol"
+                                      style="width: 75%" data-prop="nom">
+                                <option value=""></option>
+                              </select>
+                              <br>ó Seleccione un nombre de la lista</br>
+                              <select multiple id="selectNombreLista" data-placeholder="Seleccion un nombre"
+                                      data-optpar="selectNombreTermino" data-lbfilval="lblFilSelecNombre"
+                                      data-elemento="Nombre" class="selectDivPol"
+                                      style="width: 75%" data-prop="nom">
+                                <option value=""></option>
+                              </select>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingCiudad">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCiudad" aria-expanded="false" aria-controls="collapseCiudad">
+                              Por Region
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseCiudad" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCiudad">
+                          <div class="panel-body">
+
+                            Seleccione un departamento
+                            <select multiple class="selectDivPol" id="selectDepartmentos" data-placeholder="Seleccion un departamento"
+                                    style="width: 75%" data-optpar="selectCiudad" data-elemento="Departamento"
+                                    data-lbfilval="lblFilSelecDepartamentoCiudad" data-prop="dep">
+                              <option value=""></option>
+                            </select>
+
+                            <br>o Seleccione directamente una ciudad</br>
+
+                            <select multiple class="selectDivPol" id="selectCiudad" data-placeholder="Seleccion una ciudad"
+                                    style="width: 75%" data-elemento="Ciudad" data-optpar="selectDepartmentos"
+                                    data-lbfilval="lblFilSelecDepartamentoCiudad" data-prop="cit">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingMay">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseMay" aria-expanded="false" aria-controls="collapseMay">
+                              Por Mayorista
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseMay" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMay">
+                          <div class="panel-body">
+                            <select multiple class="selectDivPol" id="selectCategoria" data-placeholder="Seleccion una Mayorista"
+                                    style="width: 75%" data-elemento="Mayorista"
+                                    data-lbfilval="lblFilSelecMayorista" data-prop="cat">
+                              <option value=""></option>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingCer">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCer" aria-expanded="false" aria-controls="collapseCer">
+                              Por Certificador
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseCer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCer">
+                          <div class="panel-body">
+                            <select multiple class="selectDivPol" id="selectCertificador" data-placeholder="Seleccion un Certificador"
+                                    style="width: 75%" data-elemento="Certificador"
+                                    data-lbfilval="lblFilSelecCertificador" data-prop="cer">
+                              <option value=""></option>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOpe">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOpe" aria-expanded="false" aria-controls="collapseOpe">
+                              Por Operador
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseOpe" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCer">
+                          <div class="panel-body">
+                            <select multiple class="selectDivPol" id="selectOperador" data-placeholder="Seleccion un Operador"
+                                    style="width: 75%" data-elemento="Operador"
+                                    data-lbfilval="lblFilSelecOperador" data-prop="mar">
+                              <option value=""></option>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingPrv">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapsePrv" aria-expanded="false" aria-controls="collapsePrv">
+                              Por Provedor
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapsePrv" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrv">
+                          <div class="panel-body">
+                            <br>Provedor 1</br>
+                            <select multiple class="selectDivPol" id="selectProvedor1" data-placeholder="Seleccion un Provedor 1"
+                                    style="width: 75%" data-elemento="Provedor_1"
+                                    data-lbfilval="lblFilSelecProvedor1" data-prop="prv1">
+                              <option value=""></option>
+                            </select>
+                            <br>Provedor 2</br>
+                            <select multiple class="selectDivPol" id="selectProvedor2" data-placeholder="Seleccion un Provedor 2"
+                                    style="width: 75%" data-elemento="Provedor_2"
+                                    data-lbfilval="lblFilSelecProvedor2" data-prop="prv2">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingServ">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseServ" aria-expanded="false" aria-controls="collapseServ">
+                              Por Servicio
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseServ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServ">
+                          <div class="panel-body">
+
+                            <div class="btn-group btn-group-vertical" role="group" aria-label="..." data-toggle="buttons">
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="was" value="Lavado">Lavado
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="rcar" value="Taller">Taller
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="oil" value="Cambio Aceite">Cambio Aceite
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="ins" value="Seguros">Seguros
+                              </label>
+
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="hot" value="Hotel">Hotel
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="res" value="Restaurante">Restaurante
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="gro" value="Mercado">Mercado
+                              </label>
+
+                            </div>
+                            <div class="btn-group btn-group-vertical" role="group" aria-label="..." data-toggle="buttons">
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="smon" value="Envio Divisas">Envio Divisas
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="atm" value="Cajero Aut.">Cajero Aut.
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="gym" value="Gimnasio">Gimnasio
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="ffo" value="Comida Rapida">Comida Rapida
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="scel" value="Venta Celulares">Venta Celulares
+                              </label>
+
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="trep" value="Montallantas">Montallantas
+                              </label>
+                              <label class="btn btn-default inputWalls">
+                                <input type="checkbox" name="inputWalls" data-serv="par" value="Parqueadero">Parqueadero
+                              </label>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingVcon">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseVcon" aria-expanded="false" aria-controls="collapseVcon">
+                              Por Fecha de Vencimiento
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseVcon" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingVcon">
+                          <div class="panel-body">
+                            <div class="form-horizontal">
+                              <div class="form-group">
+                                <label for="vconDesde" class="col-sm-3 control-label">Fecha desde</label>
+
+                                <div class="col-sm-9">
+                                  <input id="vconDesde" class="form-control dateForm" name="vconDesde" type="date"
+                                         placeholder="yyyy-mm-dd" data-lbfilval="lblFilInputVconFrom" data-elemento="Fecha_desde">
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"  ></span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="vconHasta" class="col-sm-3 control-label">Fecha hasta</label>
+
+                                <div class="col-sm-9">
+                                  <input id="vconHasta" class="form-control  dateForm"  name="vconHasta" type="date" data-elemento="Fecha_hasta" data-lbfilval="lblFilInputVconTo" placeholder="yyyy-mm-dd"/>
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"  ></span>
+                                  </span>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingUbic">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseUbic" aria-expanded="false" aria-controls="collapseUbic">
+                              Por ubicadas
+                              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseUbic" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingUbic">
+                          <div class="panel-body">
+                            <div class="btn-group center" role="group" aria-label="..." data-toggle="buttons">
+                              <label class="btn btn-default ubicad active">
+                                <input type="checkbox" name="ubicad" value="Ubicadas" data-ubic="loc" checked="true">Ubicadas
+                              </label>
+                              <label class="btn btn-default ubicad active">
+                                <input type="checkbox" name="ubicad"  value="No Ubicadas" data-ubic=null checked="true">No Ubicadas
+                              </label>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="centrar">
+                    <div  class="btn btn-default btnFiltrar"><span class="glyphicon glyphicon-filter" /> Filtrar</div>
+                    <div  class="btn btn-default btnLimpiar"><span class="glyphicon glyphicon-trash" /> Limpiar</div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                  <div id="msgSpSearch"  class="centrar alert alert-info">No ha seleccionado un metodo de busqueda</div>
+                  <br/>
+                  <div class="btn-group  centrar center-block" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhPoligon">Poligono</button>
+                    <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhCirculo" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Circulo</button>
+
+                  </div>
+                  <br/>
+                  <div class="collapse" id="collapseExample">
+                    <div class="well">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default radioSpSearch" data-radio="1">1 Km</button>
+
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default radioSpSearch" data-radio="2">2 Km</button>
+
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default radioSpSearch" data-radio="5">5 Km</button>
+
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default radioSpSearch" data-radio="10">10 Km</button>
+                        </div>
+                      </div>
+                    </div>
+                    <span id="radioCircle"></span>
+
+
+                  </div>
+                  <br/>
+                  <div class="centrar">
+                    <button type="button" class="btn btn-default" id="btnSpSearch"><span class="glyphicon glyphicon-filter" /> Filtrar</button>
+                    <button type="button" class="btn btn-default" id="btnSpLimpiar" ><span class="glyphicon glyphicon-trash" /> Limpiar</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div id="panelMapList" class="col-xs-8 col-xs-height col-full-height ">
+        <div id="noObjetosEncontradosMsg" class="noObjetosListados alert alert-danger" role="alert">
+          <strong>No se encontraron datos con los parámetros de búsqueda</strong>
+          <br/>
+          <span>(Por favor remueva o cambie alguno de los filtros y repita nuevamente la búsqueda)</span>
+        </div>
+        <div id="objetosEncontrados" class="alert alert-success" role="alert">
+          <strong>Se han encontrado <span id="noEncontrados"></span> estaciones</strong>
+        </div>
+
+        <div class="tabbable panel panel-default todoAlto">
+          <ul class="nav nav-tabs  nav-justified">
+            <li class="active"><a href="#mapaTab" id="btnTabMap" data-toggle="tab"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> MAPA</a></li>
+            <li><a href="#tablaTab" data-toggle="tab"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> TABLA</a></li>
+
+          </ul>
+          <div class="tab-content todoAlto ">
+            <div id="mapaTab" class="tab-pane todoAlto active">
+
+
+              <input type="search" class="form-control" id="pac-input"  placeholder="Buscador de Lugares">
+
+
+              <div id="map" class="todoAlto"></div>
+            </div>
+            <div id="tablaTab" class="tab-pane todoAlto  overflow">
+              <div class="container-fluid todoAlto">
+                <div class="panel">
+
+
+
+                  <div  id="listaGas" >
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                      <button type="button" class="sort btn btn-default" data-sort="nom">Ordenar por Nombre</button>
+                      <button type="button" class="sort btn btn-default" data-sort="cit">por Ciudad</button>
+                      <button type="button" class="sort btn btn-default" data-sort="dep">por Departamente</button>
+                      <button type="button" class="sort btn btn-default" data-sort="cat">por Mayorista</button>
+                      <button type="button" id="btnDownload" class="btn btn-default" >Descargar</button>
+                    </div>
+                    <div class="pagination"></div>
+                    <ul class="list list-group">
+
+                    </ul>
+                  </div>
+
+                  <div class="noObjetosListados alert alert-danger" role="alert">
+                    <strong>No se encontraron datos con los parámetros de búsqueda</strong>
+                    <br/>
+                    <span>(Por favor remueva o cambie alguno de los filtros y repita nuevamente la búsqueda)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<footer>
+  <p class="pull-right">&copy; Gisco 2014</p>
+</footer>
+<!-- Modal departamentos-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Seleccion Departmentos</h4>
+      </div>
+      <button id="btnLoadAll" class="btn btn-default">Descargar Todos</button>
+      <div id="contentDeptos" class="modal-body todoAlto overflow">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- mensaje de finalizacion de carga de departamento-->
+<div class="modal fade" id="mensajes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="mensajesLabel">Aviso</h4>
+      </div>
+      <div id="contentMensajes" class="modal-body todoAlto overflow">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="templateDepto" type="text/html">
+  <div id="apto{{DepartamentoSin}}" class="dptoSec margen">
+    <h4>{{Departamento}}</h4>
+    <span class="dptoSin">Sin descargar</span>
+    <button data-depto="{{Departamento}}" data-target="#apto{{DepartamentoSin}}" class="btn btn-default dptoBtnLoad dptoSin">Descargar</button>
+    <div class="dptoLoadEnd"><span class="dptoCount">0</span> Estaciones</div>
+    <div class="progress dpto dptoLoading">
+      <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <span class="sr-only">100% Complete</span>Cargando
+      </div>
+    </div>
+  </div>
+
+
+</script>
+<script id="templateDetail" type="text/html">
+
+  <div class="panel panel-default todoAncho">
+    <h3 >{{nom}}</h3>
+  </div>
+  <div class="tabla">
+
+
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Departamento:</div>
+      <div class="tablacolumna">{{dep}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Ciudad:</div>
+      <div class="tablacolumna"> {{cit}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Direccion:</div>
+      <div class="tablacolumna"> {{dir}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Mayorista:</div>
+      <div class="tablacolumna"> {{cat}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Operador:</div>
+      <div class="tablacolumna">{{mar}}</div>
+      <br/></div>
+
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Certificador:</div>
+      <div class="tablacolumna">{{cer}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Tel:</div>
+      <div class="tablacolumna">{{tel}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Vol:</div>
+      <div class="tablacolumna">{{vol}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Vencimiento:</div>
+      <div class="tablacolumna">{{vcon}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Provedor 1:</div>
+      <div class="tablacolumna"> {{prv1}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Provedor 2: </div>
+      <div class="tablacolumna"> {{prv2}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Email: </div>
+      <div class="tablacolumna"> {{eml}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Representante Legal: </div>
+      <div class="tablacolumna">{{rpl}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">
+        Lavado: <span data-if="{{was}}"></span><br/>
+        Taller: <span data-if="{{rcar}}"></span><br/>
+        Cambio Aceite: <span data-if="{{oil}}"></span><br/>
+        Seguro: <span data-if="{{ins}}"></span><br/>
+        Hotel: <span data-if="{{hot}}"></span><br/>
+        Restaurante: <span data-if="{{res}}"></span><br/>
+        Mercado: <span data-if="{{gro}}"></span><br/>
+      </div>
+      <div class="tablacolumna">
+        Envio Divisas<span data-if="{{smon}}"></span><br/>
+        Cajero: <span data-if="{{atm}}"></span><br/>
+        Gimnacio: <span data-if="{{gym}}"></span><br/>
+        Comida Rapida: <span data-if="{{ffo}}"></span><br/>
+        Vente Celulares: <span data-if="{{scel}}"></span><br/>
+        Montallantas: <span data-if="{{trep}}"></span><br/>
+        Parqueadero: <span data-if="{{par}}"></span><br/>
+      </div>
+    </div>
+
+
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Observaciones:  </div>
+      <div class="tablacolumna"> {{obs}}</div>
+      <br/></div>
+    <div class="tablafila panel panel-default">
+      <div class="tablacolumna">Revisado por:  </div>
+      <div class="tablacolumna"> {{rvp}}</div>
+      <br/></div>
+  </div>
+  <div>
+    <button class="btn btn-default  btnEdit">Editar</button>
+    <span class="id hidden">{{id}}</span>
+  </div>
+</script>
+
+<script id="templateGasItem" type="x-tmpl-listjs">
+      <li class="list-group-item">
+          <span class="loc hidden"></span>
+          <h3 class="nom"></h3>
+          (<span class="cat"></span>)<br/>
+          <button class="btn btn-dafault btnIrA">Ir</button>
+          <button class="btn btn-dafault btnEdit">Editar</button>
+          <span class="dep"></span>-<span class="cit"></span>(<span class="dir"></span>)
+          <span class="id hidden"></span>
+
+      </li>
+
+    </script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&libraries=drawing&libraries=places"></script>
+<!-- build:js scripts/vendorindex.js -->
+  <!-- bower:js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+<script src="../bower_components/list.js/dist/list.js" ></script>
+
+<script src="../bower_components/select2-dist/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../bower_components/papaparse/papaparse.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+
+
+<!-- build:js scripts/pluginsindex.js -->
+
+<!-- bower:js -->
+<script src="scripts/vendor/jquery.toaster.js"></script>
+
+
+<script src="scripts/vendor/markerclusterer.js"></script>
+<script src="../bower_components/list.pagination.js/dist/list.pagination.js" ></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js scripts/mainindex.js -->
+<!-- bower:js -->
+<script src="scripts/index.js"></script>
+<script src="scripts/MdlDpto.js"></script>
+<script src="scripts/MdlList.js">  </script>
+<script src="scripts/MdlFilter.js"></script>
+<script src="scripts/MdlFilterShape.js"></script>
+<script src="scripts/MdlCluster.js"></script>
+<script src="scripts/ModuleGasMarket.js"></script>
+
+
+<!-- endbower -->
+<!-- endbuild -->
+
+</body>
+</html>

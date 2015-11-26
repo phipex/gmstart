@@ -1,0 +1,224 @@
+html,body{
+  height: 100%;
+  width: 100%;
+  max-height: 600px;
+}
+
+/*body {
+  padding-top: 120px;
+  padding-bottom: 20px;
+}*/
+
+
+
+#map{
+  padding-top: 90px;
+  height: 85%;
+  width: 100%;
+  /*background-color: blue;*/
+  display: inline-block;
+}
+
+.todoAlto{
+  height: 100%;
+
+}
+
+
+.centrar{
+  text-align:center;
+  margin: 0 auto;
+}
+
+
+.selectDivPol{
+  width: 80%;
+}
+
+.overflow{
+  overflow: auto;
+}
+
+
+table
+{
+  table-layout: fixed;
+
+}
+
+
+/*.navbar-brand{
+  padding: 0 15px;
+}*/
+
+#pac-input{
+  margin-top: 16px;
+  width: 70%;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+#cargando{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.margen{
+  margin: 20px;
+  padding: 20px;
+
+}
+
+div.tabla{
+  display: table;
+  border-spacing: 5px;
+}
+div.tablafila{
+  display: table-row;
+}
+div.tablacolumna{
+  display: table-cell;
+  width: 50%;
+}
+
+[data-if="0"]:after{
+  content: "No"
+}
+[data-if="1"]:after{
+  content: "Si"
+}
+
+span.loc:empty + h3.nom{
+  color: red;
+}
+
+
+
+/* columns of same height styles */
+
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+
+/* vertical alignment styles */
+
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
+.item {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #cecece;
+  padding: 12px 6px;
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom,color-stop(0%, #f4f4f4), color-stop(100%, #ededed));
+  background: -moz-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+  background: -ms-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+  background-color: blue;
+}
+#mapcontainer{
+  width: 100%;
+  height: 100%;
+
+}
+
+#form{
+  background-color: red;
+}
+
+footer{
+  height: 4em;
+}
+
+.navbar-brand {
+  padding: 13px 15px;
+}
+
+.navbar-brand img {
+  height: 70px;
+  display: inline-block;
+}
+
+
+.alert.alert-info {
+  background-color: rgba(52, 152, 219, 0.43);
+  border-color: rgba(52, 152, 219, 0.55);
+}
+
+#profile > .btn-group > .btn{
+  float: none;
+}
+.panel-bot-up{
+  padding-bottom: 24px;
+  padding-top: 24px;
+}
+
+@media (min-width: 768px) {
+  #maxH{
+    max-height: 400px;
+    overflow: auto;
+  }
+}
+@media (min-width: 992px) {
+  #maxH{
+    max-height: 600px;
+    overflow: auto;
+  }
+}
+@media (min-width: 1200px) {
+  #maxH{
+    max-height: 800px;
+    overflow: auto;
+  }
+}
+
+.navbar-text {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.todoAncho{
+  width: 100%;
+}

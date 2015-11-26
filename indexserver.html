@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GasMarket</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/gisco_loader.css" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap-theme2.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/magic-bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="js/vendor/select2-3.5.0/select2.css" type="text/css" />
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      /*padding-top: 100px;
+      padding-bottom: 20px;*/
+    }
+
+
+
+    #map {
+      padding-top: 90px;
+      height: 100%;
+      width: 68%;
+      background-color: blue;
+      display: inline-block;
+    }
+
+    #edit {
+      height: 100%;
+      width: 30%;
+      display: inline-block;
+    }
+
+
+    #listaCategorias {
+      /*background-color: #808080;*/
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+    }
+
+
+
+    .todoAlto {
+      height: 100%;
+    }
+
+    /*cra un borde*/
+    .marcoBorde {
+      *border: .01em solid #999999;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      -ms-border: 1px solid rgba(0, 0, 0, 0.4);
+      -webkit-border-radius: 5px 5px 5px 5px;
+      -moz-border-radius: 5px 5px 5px 5px;
+      -ms-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+
+
+
+    .centrar {
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .separa {
+      padding: 0.5em;
+    }
+
+    .selectDivPol {
+      width: 80%;
+    }
+
+    .overflow {
+      overflow: auto;
+    }
+
+    .colmFilter {
+      width: 20%;
+    }
+
+    table {
+      table-layout: fixed;
+    }
+
+    .noloc {
+      color: red;
+      text-decoration: underline;
+    }
+
+    .navbar-brand {
+      padding: 0px 15px;
+    }
+
+    #pac-input {
+      margin-top: 16px;
+      padding: 0 11px 0 13px;
+      width: 50%;
+    }
+  </style>
+  <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
+  <!--<link rel="stylesheet" href="css/main.css">-->
+
+  <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<header class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="#">
+        <img src="img/gisco_logo.png">
+        <img src="img/LogoJorgebermudez_opt.png">
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <div class="navbar-form navbar-right">
+
+        <div class="form-group">
+          <input type="text" id="quick_search" class="form-control  input-lg" placeholder="Quick Search">
+
+          <form method="post" action="./" id="Form1">
+            <div class="aspNetHidden">
+              <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+              <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+              <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="7ylFmVzFQmbhHDOC7q3s0G3Rm3ZB/kNJKsJWXaH0q+rMaSLUEmsNA3RnwHWdmRZXC36iyJynkFLSHRMLJI6m3oTaXxtdpflhQEdmkEF/bYj4JpfyfodBm72uEL9sBMC/v/PUpkd3VMwdFJou3g+2K3U9gFPnVx1Q1Ssxym77j4g5FOX7lxEF7B2q0lKFkeYUTFFMsU7kACt2QIkFIDfGI3RbZU1N6dbtvt2X+BIPhHbv5fPM5Srj3VWot0NbGdek" />
+            </div>
+
+            <script type="text/javascript">
+              //<![CDATA[
+              var theForm = document.forms['Form1'];
+              if (!theForm) {
+                theForm = document.Form1;
+              }
+              function __doPostBack(eventTarget, eventArgument) {
+                if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                  theForm.__EVENTTARGET.value = eventTarget;
+                  theForm.__EVENTARGUMENT.value = eventArgument;
+                  theForm.submit();
+                }
+              }
+              //]]>
+            </script>
+
+
+            <div class="aspNetHidden">
+
+              <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2E762901" />
+              <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="eOnrIUrUWLrqJcBoi8CQ7jYfUnDinO0C39nvnmIQrkUomDcGbfrDJgv72lfYRwtOFYw/zSAxTYWHDV3cBGZc9M4wQneELH8o8FR7df5eDjLaRzCdWV1Xj5w0mjTxaAuY" />
+            </div>
+
+            <p>
+              Hola <a href="../Account/Manage" id="LoginView1_A1" class="username" title="Manage your account">
+              <span id="LoginView1_LoginName1" class="username">jorgeadmin</span>
+            </a>!
+              <a id="LoginView1_LoginStatus1" href="javascript:__doPostBack(&#39;LoginView1$LoginStatus1$ctl00&#39;,&#39;&#39;)">Cerrar sesión</a>
+            </p>
+
+          </form>
+        </div>
+      </div>
+    </div><!--/.navbar-collapse -->
+  </div>
+</header>
+
+
+
+<div class="container-fluid todoAlto separa">
+  <div class="centrar" id="cargando">
+    <h3>...Cargando, espere un momento por favor...</h3>
+    <div id="noTrespassingOuterBarG">
+
+      <div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
+        <div class="noTrespassingBarLineG"> </div>
+        <div class="noTrespassingBarLineG"> </div>
+        <div class="noTrespassingBarLineG"> </div>
+        <div class="noTrespassingBarLineG"> </div>
+        <div class="noTrespassingBarLineG"> </div>
+        <div class="noTrespassingBarLineG"> </div>
+      </div>
+    </div>
+    <br />
+  </div>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div role="tabpanel">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> Filtro por Datos</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-edit"></span> Filtro Espacial</a></li>
+
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="home">
+          <table class="table table-bordered table-hover table-striped">
+
+            <thead>
+            <tr>
+              <th class="centrar">Nombre</th>
+              <th class="centrar">Departamento</th>
+              <th class="centrar">Ciudad</th>
+              <th class="centrar">Certificador</th>
+              <th class="centrar">Mayorista</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="centrar">
+
+                <select class="selectDivPol" id="selectNombre">
+                  <option></option>
+                </select>
+
+              </td>
+
+              <td class="centrar">
+                <select class="selectDivPol" id="selectDepartmento">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectCiudad">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectCertificador">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectCategoria">
+                  <option></option>
+                </select>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+              <th>Servicios</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <div class="btn-group" role="group" aria-label="..." data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="was" value="Washing">Lavado
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="rcar" value="Car Reparing">Taller
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="oil" value="Oil Change">Cambio Aceite
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="ins" value="Insurance">Seguros
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="hot" value="Hotel">Hotel
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="res" value="Restaurang">Restaurante
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="gro" value="Grocery">Mercado
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="smon" value="Money sending">Envio Divisas
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="atm" value="ATM">Cajero Aut.
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="gym" value="gym">Gimnasio
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="ffo" value="fast food">Comida Rapida
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="scel" value="cellphone store">Venta Celulares
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="trep" value="Tire repair">Montallantas
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="checkbox" name="inputWalls" data-serv="par" value="Parking">Parqueadero
+                  </label>
+
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered table-hover table-striped">
+
+            <thead>
+            <tr>
+              <th class="centrar">Provedor 1</th>
+              <th class="centrar">Provedor 1</th>
+              <th class="centrar">Operador</th>
+              <th class="centrar">No ubicados</th>
+              <th class="centrar">Accion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectProvedor1">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectProvedor2">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <select multiple class="selectDivPol" id="selectOperador">
+                  <option></option>
+                </select>
+              </td>
+              <td class="centrar">
+                <label for="selectUbi">ubicados</label>
+                <input id="selectUbi" name="selectUbi" type="checkbox" checked />
+
+                <label for="selectNoUbi">no ubicados</label>
+                <input id="selectNoUbi" name="selectNoUbi" type="checkbox" checked />
+              </td>
+              <td class="centrar">
+                <div id="btnFiltrar" class="btn btn-default"><span class="glyphicon glyphicon-filter" /> Filtrar</div>
+                <div id="btnLimpiar" class="btn btn-default">Limpiar</div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile">
+          <div class="panel panel-default centrar">
+
+            <div id="msgSpSearch" class="centrar">No ha seleccionado un metodo de busqueda</div>
+            <br />
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhPoligon">Poligono</button>
+              <button type="button" class="btn btn-default btnSpSrh" id="btnSpSrhCirculo" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Circulo</button>
+
+            </div>
+            <br />
+            <div class="collapse" id="collapseExample">
+              <div class="well">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-default radioSpSearch" data-radio="1">1 Km</button>
+                  <button type="button" class="btn btn-default radioSpSearch" data-radio="2">2 Km</button>
+                  <button type="button" class="btn btn-default radioSpSearch" data-radio="5">5 Km</button>
+                  <button type="button" class="btn btn-default radioSpSearch" data-radio="10">10 Km</button>
+                </div>
+              </div>
+              <span id="radioCircle"></span>
+            </div>
+            <br />
+            <div class="centrar">
+              <button type="button" class="btn btn-default" id="btnSpSearch"><span class="glyphicon glyphicon-filter" /> Filtrar</button>
+              <button type="button" class="btn btn-default" id="btnSpLimpiar">Limpiar</button>
+            </div>
+            <br />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <div class="noObjetosListados alert alert-danger" role="alert">
+    <strong>No se encontraron datos con los parametros de busqueda</strong>
+    <br />
+    <span>(Por favor remueva o cambie alguno de los filtros y repitela nuevamente la busqueda)</span>
+  </div>
+  <div id="objetosEncontrados" class="alert alert-success" role="alert">
+    <strong>Se han encontrado <span id="noEncontrados"></span></strong>
+  </div>
+
+  <div class="tabbable panel panel-default todoAlto">
+    <ul class="nav nav-tabs  nav-justified">
+      <li class="active"><a href="#mapaTab" id="btnTabMap" data-toggle="tab"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> MAPA</a></li>
+      <li><a href="#tablaTab" id="btnTabTable" data-toggle="tab"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> TABLA</a></li>
+
+    </ul>
+    <div class="tab-content todoAlto ">
+      <div id="mapaTab" class="tab-pane todoAlto active">
+
+        <div class="centrar">
+          <!--Latitud:<span id="mapPosLat"></span>-->
+          <!--Longitud:<span id="mapPosLon"></span>-->
+
+          <br /><label for="mapPosLat">Latitud</label>
+          <input id="mapPosLat" name="mapPosLat" type="number" step="0,0001">
+
+          <label for="mapPosLon">Longitud</label>
+          <input id="mapPosLon" name="mapPosLon" type="number" step="0,0001">
+          <div class="btn btn-default" id="btnBuscarCoordenadas">Ir</div>
+
+        </div>
+        <div id="edit" class="todoAlto overflow">
+          <a id="linkShare"></a><br />
+
+          <label for="gasNom">Nombre</label></br>
+          <textarea id="gasNom" name="gasNom" type="text" rows="4" cols="30" placeholder="No ha seleccionado una estacion"></textarea>
+
+          <br /><label for="gasCit">Ciudad</label>
+
+          <input id="gasCit" name="gasCit" type="text" placeholder="ingrese ciudad">
+
+          <br /><label for="gasReg">Region</label>
+          <input id="gasReg" name="gasReg" type="text" placeholder="ingrese region">
+
+          <br /><label for="gasMay">Marca</label>
+          <input id="gasMay" name="gasMay" type="text" placeholder="ingrese mayorista">
+
+          <br /><label for="gasMar">Operador</label>
+          <input id="gasMar" name="gasMar" type="text" placeholder="ingrese marca">
+
+          <br /><label for="gasDir">Direccion</label>
+          <input id="gasDir" name="gasDir" type="text" placeholder="ingrese direccion">
+
+          <br /><label for="gasLat">Latitud</label>
+          <input id="gasLat" name="gasLat" type="number" step="0,0001" placeholder="ingrese latitud">
+
+          <br /><label for="gasLon">Longitud</label>
+          <input id="gasLon" name="gasLon" type="number" step="0,0001" placeholder="ingrese longitud">
+
+          <br /><label for="gasTel">Telefono</label>
+          <input id="gasTel" name="gasTel" type="tel" placeholder="Ingrese Telefono">
+
+          <br /><label for="gasEml">Correo Electronico</label>
+          <input id="gasEml" name="gasEml" type="email" placeholder="Ingrese Correo Electronico">
+
+          <br /><label for="gasRpl">Representante Legal</label>
+          <input id="gasRpl" name="gasRpl" type="text" placeholder="Ingrese Representante Legal">
+
+          <br /><label for="gasVcon">Vencimiento</label>
+          <input id="gasVcon" name="gasVcon" type="date" placeholder="yyyy-MM-dd" data-date='{"splitInput": true}'>
+
+          <br /><label for="gasPrv1">Provedor Tipo 1</label>
+          <input id="gasPrv1" name="gasPrv1" type="text" placeholder="Ingrese Provedor Tipo 1">
+
+          <br /><label for="gasPrv2">Provedor Tipo 1</label>
+          <input id="gasPrv2" name="gasPrv2" type="text" placeholder="Ingrese Provedor Tipo 2">
+
+          <br /><label for="gasCer">Certificador</label>
+          <input id="gasCer" name="gasCer" type="text" placeholder="Ingrese Certificador">
+
+          <br /><label for="gasVol">Volumen</label>
+          <input id="gasVol" name="gasVol" type="number" step="0,0001" placeholder="Ingrese volumen">
+
+          <br />
+
+          Lavado <input type="checkbox" id="gasWashing"><br />
+          Taller <input type="checkbox" id="gasCarReparing"><br />
+          Cambio Aceite <input type="checkbox" id="gasOilChange"><br />
+          Seguro <input type="checkbox" id="gasInsurance"><br />
+          Hotel <input type="checkbox" id="gasHotel"><br />
+          Restaurante <input type="checkbox" id="gasRestaurang"><br />
+          Mercado <input type="checkbox" id="gasGrocery"><br />
+          Envio Divisas <input type="checkbox" id="gasMoneysending"><br />
+          Cajero <input type="checkbox" id="gasATM"><br />
+          Gimnasio <input type="checkbox" id="gasGym"><br />
+          Comida Rapida <input type="checkbox" id="gasFastfood"><br />
+          Celulares <input type="checkbox" id="gasCellphonestore"><br />
+          Montallantas <input type="checkbox" id="gasTirerepair"><br />
+          Parqueadero <input type="checkbox" id="gasParking"><br />
+
+          <label for="gasObse">Observaciones</label><br />
+          <textarea id="gasObse" name="gasObse" type="text" rows="4" cols="30" placeholder="No ha seleccionado una estacion"></textarea>
+
+
+          <br /><label for="gasRvp">Revizado Por</label>
+          <input id="gasRvp" name="gasRvp" type="text" placeholder="Ingrese Iniciales">
+
+          <br />
+          <div class="btn btn-default" id="btnActData">Actualizar</div>
+          <div class="btn btn-default" id="btnActMarkPos">Cambiar pos</div>
+
+
+        </div>
+        <input type="text" class="form-control" id="pac-input" placeholder="Buscador de Lugares">
+        <div id="map" class="todoAlto"></div>
+
+      </div>
+      <div id="tablaTab" class="tab-pane todoAlto overflow">
+        <div id="tabla" class="todoAlto overflow">
+          <div id="gasTable" class="table-responsive  overflow">
+
+            <div class="btn-group pull-right" role="group" aria-label="...">
+              <button type="button" class="sort btn btn-default" data-sort="nom">Ordenar por Nombre</button>
+              <button type="button" class="sort btn btn-default" data-sort="cit">por Ciudad</button>
+              <button type="button" class="sort btn btn-default" data-sort="dep">por Departamente</button>
+              <button type="button" class="sort btn btn-default" data-sort="cat">por Mayorista</button>
+            </div>
+
+            <div class="pagination"></div>
+            <table class="table table-bordered table-hover table-striped  overflow">
+
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+                <th>Departamento</th>
+                <th>Direccion</th>
+                <th>Marca</th>
+                <th>Accion</th>
+              </tr>
+              </thead>
+              <tbody id="listaGas" class="list"></tbody>
+            </table>
+
+            <div class="noObjetosListados alert alert-danger" role="alert">
+              <strong>No se encontraron datos con los parametros de busqueda</strong>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <br />
+
+  <footer>
+    <p>&copy; Gisco 2014</p>
+  </footer>
+</div> <!-- /container -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js" type="text/javascript"><\/script>')</script>
+
+<script src="js/vendor/bootstrap.min.js" type="text/javascript"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&libraries=drawing&libraries=places"></script>
+<script src="js/vendor/markerclusterer.js" type="text/javascript"></script>
+<script src="js/vendor/select2-3.5.0/select2.js" type="text/javascript"></script>
+<!--<script src="data/departamentmunicipality4326.js" type="text/javascript"></script>-->
+<script src="js/vendor/mustache.js" type="text/javascript"></script>
+<script src="js/vendor/list.js" type="text/javascript"></script>
+<script src="js/vendor/list.pagination.min.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
+<script>
+  webshim.activeLang('en-US');
+  webshims.setOptions('forms-ext', { types: 'date' });
+  webshims.polyfill('forms forms-ext');
+
+</script>
+<script id="templateGas" type="x-tmpl-mustache">
+
+        <tr data-idmarket="mrk_{{id}}_" class="gas-item {{loc}}">
+            <td class="id">{{id}}</td>
+            <td class="nom">{{nom}}</td>
+            <td class="cit">{{cit}}</td>
+            <td class="dep">{{dep}}</td>
+            <td class="dir">{{dir}}</td>
+            <td class="cat">{{cat}}</td>
+            <td>
+                <div data-idmarket="mrk_{{id}}_" class="btn btn-default btnIr">Ver</div>
+                <span class="mrkid hidden">mrk_{{id}}_</span>
+            </td>
+        </tr>
+
+    </script>
+
+
+
+<script>
+
+  var markerClusterer = null;
+
+  var listenerHandle = null;
+
+  $(document).ready(function () {
+    $("input").val("");
+    $("textarea").val("");
+    initMap();
+
+    ModuleGasMarket.loadData();
+
+
+    $(".noObjetosListados").hide();
+    $("#objetosEncontrados").hide();
+
+
+  });
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: new google.maps.LatLng(4.5708169672728345, -74.6363327178642),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      overviewMapControl: true,
+      keyboardShortcuts: true,
+      scaleControl: true,
+      OverviewMapControlOptions: {
+        opened: true
+      }
+    });
+
+
+
+    var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        return;
+      }
+
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);  // Why 17? Because it looks good.
+      }
+
+    });
+
+  }
+
+  function sinEspacions(nombre) {
+    if (nombre) {
+      nombre = nombre.replace(/[^a-z0-9]/gi, '');
+      nombre = nombre.replace(/ /g, "_");
+    }
+    return nombre;
+  }
+
+
+  function limpiarFiltros() {
+    $("#selectNombre,#selectCategoria,#selectDepartmento,#selectCiudad,#selectOperador,#selectCertificador,#selectProvedor1,#selectProvedor2").select2("val", "");
+
+
+  }
+
+  function diffObject(obj1, obj2) {
+    var result = {};
+    for (key in obj1) {
+      if (obj2[key] != obj1[key]) result[key] = obj2[key];
+      if (typeof obj2[key] == 'array' && typeof obj1[key] == 'array')
+        result[key] = arguments.callee(obj1[key], obj2[key]);
+      if (typeof obj2[key] == 'object' && typeof obj1[key] == 'object')
+        result[key] = arguments.callee(obj1[key], obj2[key]);
+    }
+    return result;
+  }
+
+  var ModuleGasMarket = {
+    fullData: {},
+    data: {},
+    cats: [],
+    markers: [],
+    dataFilter: {
+      "nom": {},
+      "cit": {},
+      "dep": {},
+      "cat": {},
+      "mar": {},
+      "cer": {},
+      "prv1": {},
+      "prv2": {}
+    },
+    itemTemplate: null,
+    selecTable: null,
+    gasList: null,
+    bound: new google.maps.LatLngBounds(),
+    valueNames: ['nom', 'cit', 'dep', 'dir', 'cat', 'mrkid', 'id'],
+    qSearch: {
+      list: null,
+      idTime: null,
+      ini: function (list, event) {
+        ModuleGasMarket.qSearch.list = list;
+        if (ModuleGasMarket.qSearch.idTime) {
+          clearTimeout(ModuleGasMarket.qSearch.idTime);
+        }
+
+        var evento = function () {
+          ModuleGasMarket.qSearch.idTime = null;
+
+          event(ModuleGasMarket.qSearch.list);
+        };
+        ModuleGasMarket.qSearch.idTime = setTimeout(evento, 700);
+      }
+    },
+    loadData: function () {
+      var success = function (data) {
+        ModuleGasMarket.prepareData(data.d);
+        //ModuleGasMarket.prepareData(data.RECORDS);
+      };
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        //url: "data/combustible_point10.json",
+        //url: "data/gasmarket6_0.json",
+        url: "GasFill2.aspx/getLista",
+        contentType: "application/json; chartset:utf-8",
+        //url: "GasFill.aspx/getLista",
+        //url: "data/gasmarket.json",
+        data: {},
+        success: success,
+        error: function (error) {
+          console.error(error);
+        },
+        async: true
+      });
+
+    },
+    prepareData: function (data) {
+
+      ModuleGasMarket.itemTemplate = $('#templateGas').html();
+      Mustache.parse(ModuleGasMarket.itemTemplate);
+      ModuleGasMarket.selecTable = $('#listaGas');
+      var count = data.length;
+      for (var i = 0; i < count; i++) {
+        var obj = data[i];
+
+        //obj.vcon = replaceAll(obj.vcon,"/","-");
+
+        obj.loc = (obj.lat) ? "loc" : "noloc";//-------------
+        ModuleGasMarket.createListItem(obj);
+        var marker = ModuleGasMarket.createMarker(obj);
+        var mrkid = "mrk_" + obj.id + "_";
+        obj.mrkid = mrkid;//---------
+        marker.gasObj = obj;//-------------
+        ModuleGasMarket.data[mrkid] = marker;
+        if (obj.lat) {//-------------
+          ModuleGasMarket.markers.push(marker);//-------------
+        }
+        ModuleGasMarket.agregateFilter(obj);
+      }
+      this.fullData = data;
+      refreshCluster(ModuleGasMarket.markers, ModuleGasMarket.bound);
+
+      ModuleGasMarket.prepareList();
+      ModuleGasMarket.prepareUI();
+
+      var listenerHandle = google.maps.event.addListener(map, 'tilesloaded', function () {
+        console.info("termino");
+        google.maps.event.removeListener(listenerHandle);
+        $("#cargando").hide(2000);
+      });
+
+    },
+    startFilterList: function (filtro) {
+      var encontrados = [];
+      var array = ModuleGasMarket.fullData;
+      var count = array.length;
+      for (var i = 0; i < count; i++) {
+        var obj = array[i];
+        if (filtro(obj)) {
+          encontrados.push(obj.mrkid);
+        }
+      }
+      //console.info("encontrados",encontrados.length,encontrados);
+      var filter = function (item) {
+        //console.info("filter");
+        var res = false;
+        var objeto = item.values();
+        //console.info("----"+objeto.mrkid, encontrados[0]);
+        res = ($.inArray(objeto.mrkid, encontrados) > -1);
+        //console.assert(!($.inArray(objeto.mrkid,encontrados) > -1),"no encontrado")
+        return res;
+
+      };
+
+      ModuleGasMarket.gasList.filter();
+      ModuleGasMarket.gasList.filter(filter);
+    },
+    prepareUI: function () {
+      $("#btnLimpiar").click(function () {
+        ModuleGasMarket.gasList.filter();
+        ModuleGasMarket.gasList.search();
+        limpiarFiltros();
+      });
+      $(".btnIr").click(ModuleGasMarket.eventoBtnIr);
+      $("#quick_search").keyup(function (event) {
+
+        var val = $(this).val();
+        var len = val.length;
+        if (len > 3) {
+          ModuleGasMarket.gasList.filter();
+          ModuleGasMarket.gasList.search(val);
+        } else if (len == 0) {
+          ModuleGasMarket.gasList.search();
+        }
+        limpiarFiltros();
+      });
+
+      $("#btnFiltrar").click(function () {
+        var valueNom = $("#selectNombre").select2("val");
+        var valueCit = $("#selectCiudad").select2("val");
+        var valueReg = $("#selectDepartmento").select2("val");
+        var valueCat = $("#selectCategoria").select2("val");
+        var valueMar = $("#selectOperador").select2("val");
+        var valueUbi = $("#selectUbi").prop('checked');
+        var valueNoUbi = $("#selectNoUbi").prop('checked');
+        var valueCertf = $("#selectCertificador").select2("val");
+        var valueProv1 = $("#selectProvedor1").select2("val");
+        var valueProv2 = $("#selectProvedor2").select2("val");
+
+        var verifica = function (array) {
+          var temp = [];
+          if (array.length > 0) {
+            if (typeof array === "string") {
+              temp = array;
+            } else if ($.isArray(array)) {
+              var count = array.length
+              for (var i = 0; i < count; i++) {
+                var obj = array[i];
+                if (obj.length > 0) {
+                  temp.push(obj);
+                }
+              }
+            }
+          }
+          return temp;
+        };
+        valueNom = verifica(valueNom);
+        valueCit = verifica(valueCit);
+        valueReg = verifica(valueReg);
+        valueCat = verifica(valueCat);
+        valueMar = verifica(valueMar);
+        valueCertf = verifica(valueCertf);
+        valueProv1 = verifica(valueProv1);
+        valueProv2 = verifica(valueProv2);
+        var valFilter = {};
+
+        if (valueNom.length > 0) {
+          valFilter.nom = valueNom;
+        }
+        if (valueCit.length > 0) {
+          valFilter.cit = valueCit;
+        }
+        if (valueReg.length > 0) {
+          valFilter.reg = valueReg;
+        }
+        if (valueCat.length > 0) {
+          valFilter.cat = valueCat;
+        }
+        if (valueMar.length > 0) {
+          valFilter.mar = valueMar;
+        }
+        if (valueCertf.length > 0) {
+          valFilter.cer = valueCertf;
+        }
+        if (valueProv1.length > 0) {
+          valFilter.prv1 = valueProv1;
+        }
+        if (valueProv2.length > 0) {
+          valFilter.prv2 = valueProv2;
+        }
+        if (!(valueNoUbi && valueUbi) || !(valueNoUbi || valueUbi)) {
+
+          //console.info(valueNoUbi , valueUbi);
+          valFilter.ubi = valueUbi;
+          valFilter.nubi = valueNoUbi;
+
+        }
+
+        $("[name=inputWalls]:checked").each(function () {
+          console.info($(this).data("serv"));
+          var serv = $(this).data("serv");
+          if (!valFilter.serv) {
+            valFilter.serv = {};
+          }
+          valFilter.serv[serv] = true;
+        });
+        //console.info("consulta servicios",valFilter.serv);
+        ModuleGasMarket.gasList.filter();
+        ModuleGasMarket.gasList.search();
+        if (Object.keys(valFilter).length != 0) {
+          ModuleGasMarket.filterList(valFilter);
+        }
+        $("#quick_search").val("");
+      });
+      $(".btnSpSrh").click(function () {//si boton de filtrospacila
+        if ($(this).is("#btnSpSrhPoligon")) {//boton poligono
+          $("#msgSpSearch").text("Ha seleccionado busqueda por poligono");
+          //console.info("boton poligono");
+          //crea poligono en el centro del mapa
+          MdlFilterShape.createPolygon(map.getCenter());
+          //TODO aumentar el zoom
+        } else {//boton circulo
+          //crea circulo con el radio seleccionado
+          $("#msgSpSearch").text("Ha seleccionado busqueda por circulo, por favor seleccione el radio del mismo");
+          //console.info("boton circulo");
+
+        }
+
+      });
+      $(".radioSpSearch").click(function () {
+        var radio = $(this).data("radio");
+        radio = radio || 10;
+        radio = radio * 1000;
+        //console.info("radio",radio,map.getCenter());
+        MdlFilterShape.createCircle(map.getCenter(), radio);
+
+      });
+      $("#btnSpSearch").click(function () {//si boton buscar
+        //TODO buscar sobre la fulldata
+        var filtro = function (objeto) {
+          var res = false;
+          var lat = objeto.lat;
+          var lon = objeto.lon;
+          res = MdlFilterShape.filtro(lat, lon);
+
+          return res;
+        };
+
+
+
+        //verifica que seleccione un busqueda
+        //ingresa el filtro
+        ModuleGasMarket.startFilterList(filtro);
+      });
+
+      $("#btnSpLimpiar").click(function () {
+        ModuleGasMarket.gasList.filter();
+        MdlFilterShape.limpiar();
+      });
+      $("#slNameLoadLb").hide();
+      ModuleGasMarket.prepareUIFill();
+    },
+    prepareUIFill: function () {
+      $("#btnActMarkPos").click(function () {
+        var marker = ModuleGasMarket.marcaSel;
+        var handler = function () {
+          var lat = $("#gasLat").val();
+          var lon = $("#gasLon").val();
+          var latLng = new google.maps.LatLng(lat, lon);
+          marker.setPosition(latLng);
+          map.setCenter(latLng);
+        };
+        var eventoDrg = function () {
+
+          var pos = marker.getPosition();
+          var lat = pos.lat();
+          var lon = pos.lng();
+          $("#gasLat").val(lat);
+          $("#gasLon").val(lon);
+          //console.info("draged", lat, lon);
+        };
+        if (marker.getAnimation() != null) {
+          marker.setAnimation(null);
+          $("#gasLat,#gasLon").unbind("change", handler);
+          marker.setDraggable(false);
+          google.maps.event.clearListeners(marker, 'dragend');
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          $("#gasLat,#gasLon").bind("change", handler);
+          marker.setDraggable(true);
+
+          google.maps.event.addListener(marker, 'dragend', eventoDrg);
+        }
+
+      });
+      $("#btnActData").click(function () {
+
+        var marca = ModuleGasMarket.marcaSel;
+        //capturar el id
+        console.info(marca);
+
+        //var obj = ModuleGasMarket.fullData[id];
+        var obj = marca.gasObj;
+
+
+
+        var oldObject = jQuery.extend(true, {}, obj);
+        var id = obj.mrkid;
+        //id = id.replace("mrk_", '').replace("_","");
+        //id = parseInt(id);
+        //console.info(id);
+        var item = ModuleGasMarket.gasList.get('mrkid', id)[0];
+        var nNom = $("#gasNom").val();
+        var nCit = $("#gasCit").val();
+        var nReg = $("#gasReg").val();
+        var nMay = $("#gasMay").val();
+        var nlat = $("#gasLat").val();
+        var nLon = $("#gasLon").val();
+        var nDir = $("#gasDir").val();
+        var nMar = $("#gasMar").val();
+        var nObse = $("#gasObse").val();
+        var nCert = $("#gasCer").val();
+
+        var nTel = $("#gasTel").val();
+        var nEml = $("#gasEml").val();
+        var nRpl = $("#gasRpl").val();
+        var nVcon = $("#gasVcon").val() || "";
+        var nPvr1 = $("#gasPrv1").val();
+        var nPvr2 = $("#gasPrv2").val();
+        var nVol = parseFloat($ ("#gasVol").val()) || 0;
+
+        if (nMar == "ingrese Operador") {
+          nMar = "";
+        }
+
+
+        //TODO si la marca no esta en el origen cambiar el item
+        obj.nom = nNom;
+        obj.cit = nCit;
+        obj.dep = nReg;
+        obj.cat = nMay;
+        obj.lat = parseFloat(nlat);
+        obj.lon = parseFloat(nLon);
+        obj.dir = nDir;
+        obj.mar = nMar;
+        item.values({
+          nom: obj.nom,
+          cit: obj.cit,
+          dep: obj.dep,
+          cat: obj.cat,
+          dir: obj.dir
+
+
+        });
+
+        obj.obs = nObse;
+        obj.cer = nCert;
+
+        obj.tel = nTel;
+        obj.eml = nEml;
+        obj.rpl = nRpl;
+
+        obj.vcon = date_YMD2MDY(nVcon)||"";
+        //obj.vcon = nVcon;
+        obj.prv1 = nPvr1;
+        obj.prv2 = nPvr2;
+        obj.vol = nVol;
+
+
+
+        if (obj.lat && obj.lat != 0) {
+          var dom = item.elm;
+
+          dom.className = 'item-list';
+
+          var latLng = new google.maps.LatLng(obj.lat, obj.lon);
+          marca.setPosition(latLng);
+          map.setCenter(latLng);
+
+        }
+
+        obj.was = $("#gasWashing").prop("checked");
+        obj.rcar = $("#gasCarReparing").prop("checked");
+        obj.oil = $("#gasOilChange").prop("checked");
+        obj.ins = $("#gasInsurance").prop("checked");
+        obj.hot = $("#gasHotel").prop("checked");
+        obj.res = $("#gasRestaurang").prop("checked");
+        obj.gro = $("#gasGrocery").prop("checked");
+        obj.smon = $("#gasMoneysending").prop("checked");
+        obj.atm = $("#gasATM").prop("checked");
+        obj.gym = $("#gasGym").prop("checked");
+        obj.ffo = $("#gasFastfood").prop("checked");
+        obj.scel = $("#gasCellphonestore").prop("checked");
+        obj.trep = $("#gasTirerepair").prop("checked");
+        obj.par = $("#gasParking").prop("checked");
+        ////++++++++++++++++++++++++++++++
+        obj.rvp = $("#gasRvp").val();
+
+
+
+        //TODO actualizar todas las entradas y objetos
+        //TODO actualizar la tabla
+        //TODO actualizar el objeto de list?
+        //TODO actualizar el objeto asociado?
+        //TODO llamar el webservice con los datos actualizados
+        //console.info(obj);
+        if(!obj.vcon){
+          obj.vcon = "";
+        }
+        var despues = diffObject(oldObject, obj);
+        var antes = diffObject(obj, oldObject);
+
+        var modificaciones = {
+          antes: antes,
+          despues: despues
+        };
+
+
+
+        obj.modificaciones = JSON.stringify(modificaciones);
+        console.info("diff", obj.modificaciones);
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json; chartset:utf-8",
+          //url: "data/combustible_point5_2.json",
+          //url: "gasmarket.json",
+          url: "GasFill2.aspx/update",
+          data: JSON.stringify(obj),
+          success: function (data) {
+            alert(data.d);
+            if (data.d) {
+              console.info("succes", obj.modificaciones);
+              delete obj.modificaciones;
+            } else {
+              console.info("succes falso");
+            }
+          },
+          error: function (error) {
+            console.error(error);
+            alert(false);
+          },
+          async: true
+        });
+
+      });
+      google.maps.event.addListener(map, 'click', function (event) {
+
+        var pos = event.latLng;
+
+        //$("#mapPosLat").html(pos.lat());
+        //$("#mapPosLon").html(pos.lng());
+
+        $("#mapPosLat").val(pos.lat());
+        $("#mapPosLon").val(pos.lng());
+      });
+      $("#btnBuscarCoordenadas").click(function () {
+        var lat = $("#mapPosLat").val();
+        var lon = $("#mapPosLon").val();
+        var pos = new google.maps.LatLng(lat, lon);
+        if (lat && lat != 0 && lon != 0) {
+          var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+          });
+          marker.setPosition(pos);
+          map.panTo(pos);
+          map.setZoom(16);
+        } else {
+          alert("Intenta ingresar coordenadas erroneas");
+        }
+      });
+      $(document).on("click", "#linkShare", function (event) {
+        event.preventDefault();
+      });
+    },
+    prepareList: function () {
+      var options = {
+        valueNames: ModuleGasMarket.valueNames,
+        page: 20,
+        plugins: [
+          ListPagination({})
+        ]
+      };
+
+      ModuleGasMarket.gasList = new List('gasTable', options);
+      ModuleGasMarket.gasList.on("searchStart", function (event) {
+        //console.info("inicio load");
+        $(".noObjetosListados").hide();
+        $("#objetosEncontrados").hide();
+      });
+      var callback = function (event) {
+
+        $(".btnIr").off('click').on('click', ModuleGasMarket.eventoBtnIr);
+        var list = event.matchingItems;
+        //console.info("filter search",list);
+        ModuleGasMarket.qSearch.ini(list, function (list) {
+
+
+          var count = list.length;
+          //console.info("termino, encontro %d",count);
+
+          if (count > 0) {
+            $("#objetosEncontrados").show();
+            $("#noEncontrados").text(count);
+            ModuleGasMarket.markers = [];
+            ModuleGasMarket.bound = new google.maps.LatLngBounds();
+
+            for (var i = 0; i < count; i++) {
+              var obj = list[i];
+              //console.info("ingresar la marca",obj.elm.dataset.idmarket);
+              var idMarker = obj.elm.dataset.idmarket;
+              //console.info("idMarker",idMarker);
+              var marker = ModuleGasMarket.data[idMarker];
+              if (marker) {
+                marker.mrk_id = idMarker;
+                ModuleGasMarket.markers.push(marker);
+                var latLng = marker.getPosition();
+                if (verificaLatLon(latLng)) {
+                  ModuleGasMarket.bound.extend(latLng);
+                }
+
+
+
+              }
+
+            }
+            refreshCluster(ModuleGasMarket.markers, ModuleGasMarket.bound);
+          } else {
+            $(".noObjetosListados").show();
+          }
+
+
+        });
+      };
+      ModuleGasMarket.gasList.on("filterComplete", callback);
+      ModuleGasMarket.gasList.on("searchComplete", callback);
+      ModuleGasMarket.inicialiceFilter();
+      $(".pagination").click(function () {
+        //console.info("cambio de pagina");
+        $(".btnIr").off('click').on('click', ModuleGasMarket.eventoBtnIr);
+      });
+    },
+    eventoBtnIr: function () {
+
+
+      var value = $(this).attr('data-idmarket');
+      //console.info("me dieron", value);
+      if (value) {
+        $("#btnTabMap").click();
+        map.setZoom(18);
+        var mark = ModuleGasMarket.data[value];
+        var pos = mark.getPosition();
+        //map.setCenter(pos);
+        map.panTo(pos);
+        google.maps.event.trigger(mark, 'click');
+      }
+
+
+    },
+    filterList: function (obt) {
+      console.info("objeto a comparar", obt);
+
+      var filtro = function (objeto) {
+        //console.info("objeto de busqueda",objeto);
+        var res = true;
+        //var objeto = item.values();
+
+        if (obt.nom) {
+          var resNom = false;
+
+          resNom = (obt.nom === objeto.nom);
+
+          res = res && resNom;
+        }
+        if (obt.cit) {
+          var resCit = false;
+
+          var count = obt.cit.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.cit[i];
+            if (obj === objeto.cit) {
+              resCit = true;
+              break;
+            }
+          }
+
+          res = res && resCit;
+        }
+        if (obt.reg) {
+          var resReg = false;
+
+          /*count = obt.reg.length;
+           for (var i = 0; i < count; i++) {
+           var obj = obt.reg[i];
+           console.info(obj,objeto.dep);
+           if(obj.toLowerCase() === objeto.dep.toLowerCase())
+           {
+           resReg = true;
+           break;
+           }
+           }*/
+          //console.info(obt.reg,objeto.dep.toLowerCase(),(obt.reg === objeto.dep.toLowerCase()));
+          resReg = (obt.reg.toLowerCase() === objeto.dep.toLowerCase());
+
+          res = res && resReg;
+        }
+        if (obt.cat) {
+          var resCat = false;
+
+          count = obt.cat.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.cat[i];
+            if (obj === objeto.cat) {
+              resCat = true;
+              break;
+            }
+          }
+
+          res = res && resCat;
+        }
+        if (obt.ubi || obt.nubi) {
+          var resSolo = false;
+
+          if (objeto.lat && objeto.lat != 0) {
+            resSolo = obt.ubi;
+
+          } else {
+            resSolo = obt.nubi;
+          }
+
+          ///console.info(objeto.lat, "ubi " + obt.ubi, " nubi " + obt.nubi, resSolo,objeto);
+
+          res = res && resSolo;
+        }
+        if (obt.mar) {
+          var resMar = false;
+
+          count = obt.mar.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.mar[i];
+
+            //console.info("objeto buscando",obj,objeto,"--"+objeto.mar+"--",obj === objeto.mar);
+            if (obj === objeto.mar) {
+              resMar = true;
+              break;
+            }
+          }
+
+          res = res && resMar;
+        }
+        if (obt.serv) {
+
+
+          var count = obt.serv.length;
+          var array = Object.keys(obt.serv);
+
+          var resServ = (objeto[array[0]] == "1");
+
+          for (var i = 1; i < count; i++) {
+            var obj = array[i];
+            resServ = resServ && (objeto[array[i]] == "1");
+          }
+          res = res && resServ;
+        }
+
+        if (obt.cer) {
+
+
+          var resCertif = false;
+
+          var count = obt.cer.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.cer[i];
+            if (obj === objeto.cer) {
+              resCertif = true;
+              break;
+            }
+          }
+
+          res = res && resCertif;
+        }
+
+        if (obt.prv1) {
+
+
+          var resProve1 = false;
+
+          var count = obt.prv1.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.prv1[i];
+            if (obj === objeto.prv1) {
+              resProve1 = true;
+              break;
+            }
+          }
+
+          res = res && resProve1;
+        }
+
+        if (obt.prv2) {
+
+
+          var resProve2 = false;
+
+          var count = obt.prv2.length;
+          for (var i = 0; i < count; i++) {
+            var obj = obt.prv2[i];
+            if (obj === objeto.prv2) {
+              resProve2 = true;
+              break;
+            }
+          }
+
+          res = res && resProve2;
+        }
+
+
+        return res;
+
+      };
+
+
+      ModuleGasMarket.startFilterList(filtro);
+
+
+    },
+    createListItem: function (objt) {
+      var rendered = Mustache.render(ModuleGasMarket.itemTemplate, objt);
+      ModuleGasMarket.selecTable.append(rendered);
+
+    },
+    createMarker: function (objeto) {
+      var markerImage = new google.maps.MarkerImage(ModuleGasMarket.getImegeIrl(objeto.cat),
+        new google.maps.Size(30, 30));
+
+
+      var latLng = new google.maps.LatLng(objeto.lat,
+        objeto.lon);
+      if (verificaCoordenadas(objeto.lat, objeto.lon)) {
+        ModuleGasMarket.bound.extend(latLng);
+      }
+
+      var marker = new google.maps.Marker({
+        position: latLng,
+        icon: markerImage,
+        optimized: false
+      });
+
+      var mensaje = objeto.nom + "(" + objeto.dir + ") </br>" +
+        "<a target='_blank' href='http://maps.google.com/maps?q=&layer=c&cbll=" + objeto.lat + "," + objeto.lon + "&cbp=11,0,0,0,0'>Google Street View</a>";
+      ModuleGasMarket.addInfoWindow(marker, mensaje);
+
+      return marker;
+    },
+    getImegeIrl: function (categ) {
+      //var imegeUrl = "img/30x30/"+categ+".png";
+      var imegeUrl = "img/30x30/Otros.png";
+      return imegeUrl;
+
+    },
+    addInfoWindow: function (marker, message) {
+      //console.info(marker, message);
+      var infoWindow = new google.maps.InfoWindow({
+        content: message
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+        //console.info(this);
+        infoWindow.open(map, marker);
+        //var value = this.mrk_id;
+        //console.info(value);
+        //var obj = ModuleGasMarket.fullData[value];
+        var obj = this.gasObj
+        //console.info(obj);
+        $("#gasNom").val(obj.nom);
+        $("#gasCit").val(obj.cit);
+        $("#gasReg").val(obj.dep);
+        $("#gasMay").val(obj.cat);
+        $("#gasLat").val(obj.lat);
+        $("#gasLon").val(obj.lon);
+        $("#gasDir").val(obj.dir);
+        $("#gasMar").val(obj.mar);
+        $("#gasWashing").prop("checked", parseInt(obj.was));
+        $("#gasCarReparing").prop("checked", parseInt(obj.rcar));
+        $("#gasOilChange").prop("checked", parseInt(obj.oil));
+        $("#gasInsurance").prop("checked", parseInt(obj.ins));
+        $("#gasHotel").prop("checked", parseInt(obj.hot));
+        $("#gasRestaurang").prop("checked", parseInt(obj.res));
+        $("#gasGrocery").prop("checked", parseInt(obj.gro));
+        $("#gasMoneysending").prop("checked", parseInt(obj.smon));
+        $("#gasATM").prop("checked", parseInt(obj.atm));
+        $("#gasGym").prop("checked", parseInt(obj.gym));
+        $("#gasFastfood").prop("checked", parseInt(obj.ffo));
+        $("#gasCellphonestore").prop("checked", parseInt(obj.scel));
+        $("#gasTirerepair").prop("checked", parseInt(obj.trep));
+        $("#gasParking").prop("checked", parseInt(obj.par));
+
+        $("#gasObse").val(obj.obs);
+        $("#gasCer").val(obj.cer);
+
+        $("#gasTel").val(obj.tel);
+        $("#gasEml").val(obj.eml);
+        $("#gasRpl").val(obj.rpl);
+
+
+        $("#gasVcon").val(dateMDY2_YMD(obj.vcon));
+        //$("#gasVcon").val(obj.vcon);
+        $("#gasPrv1").val(obj.prv1);
+        $("#gasPrv2").val(obj.prv2);
+        $("#gasVol").val(obj.vol);
+
+
+        //-------------------------------
+        $("#gasRvp").val(obj.rvp);
+
+
+        var link = "http://www.mygisco.com/GasMarketFill/public/Geolocation.html?idnom=" + obj.id + "_" + obj.nom;
+        if (obj.lat != 0) {
+          link = "";
+        }
+
+
+        $("#linkShare").text(link);
+
+        ModuleGasMarket.marcaSel = marker;
+      });
+    },
+    agregateFilter: function (object) {
+      //console.info(object);
+      if (!ModuleGasMarket.dataFilter.cat[object.cat]) {
+
+        ModuleGasMarket.dataFilter.cat[object.cat] = null;
+      }
+      if (!ModuleGasMarket.dataFilter.cit[object.cit]) {
+
+        ModuleGasMarket.dataFilter.cit[object.cit] = null;
+      }
+
+      if (!ModuleGasMarket.dataFilter.nom[object.nom]) {
+
+        ModuleGasMarket.dataFilter.nom[object.nom] = null;
+      }
+
+      if (!ModuleGasMarket.dataFilter.dep[object.dep]) {
+
+        ModuleGasMarket.dataFilter.dep[object.dep] = null;
+      }
+      if ((object.mar) && (!ModuleGasMarket.dataFilter.mar[object.mar])) {
+        //console.info("object.mar",object.mar);
+        ModuleGasMarket.dataFilter.mar[object.mar] = null;
+      }
+      if ((object.cer) && (!ModuleGasMarket.dataFilter.cer[object.cer])) {
+
+        ModuleGasMarket.dataFilter.cer[object.cer] = null;
+      }
+      if ((object.prv1) && (!ModuleGasMarket.dataFilter.prv1[object.prv1])) {
+
+        ModuleGasMarket.dataFilter.prv1[object.prv1] = null;
+      }
+      if ((object.prv2) && (!ModuleGasMarket.dataFilter.prv2[object.prv2])) {
+
+        ModuleGasMarket.dataFilter.prv2[object.prv2] = null;
+      }
+    },
+    inicialiceFilter: function () {
+      //console.time("inicialiceFilter");
+      //console.profile();
+      var llenar = function (nombre, objeto, minimo) {
+        var select = $("#select" + nombre + "");
+
+        var keys = Object.keys(objeto);
+        keys.sort();
+        var count = keys.length;
+        for (var i = 0; i < count; i++) {
+          var llave = keys[i];
+          select.append("<option value='" + llave + "'>" + llave + "</option>");
+        }
+        /*var arrayInsert = [];
+
+         for (var i = 0; i < count; i++) {
+         var llave = keys[i];
+         arrayInsert.push("<option value='"+llave+"'>"+llave+"</option>");
+         }
+         select.append(arrayInsert.join(''));*/
+        var options = {
+          maximumSelectionSize: 3,
+          placeholder: " " + nombre
+        };
+        if (minimo) {
+          options.minimumInputLength = 2;
+          options.formatInputTooShort = function (input, min) { var n = min - input.length; return "Por favor ingrese " + n + " o mas caracteres" + (n == 1 ? "" : "s"); }
+        }
+        select.select2(options);
+      };
+      llenar("Nombre", ModuleGasMarket.dataFilter.nom, true);
+
+      llenar("Ciudad", ModuleGasMarket.dataFilter.cit, true);
+      llenar("Departmento", ModuleGasMarket.dataFilter.dep);
+      llenar("Categoria", ModuleGasMarket.dataFilter.cat);
+      llenar("Operador", ModuleGasMarket.dataFilter.mar);
+      llenar("Certificador", ModuleGasMarket.dataFilter.cer);
+      llenar("Provedor1", ModuleGasMarket.dataFilter.prv1);
+      llenar("Provedor2", ModuleGasMarket.dataFilter.prv2);
+      //console.timeEnd("inicialiceFilter");
+      //console.profileEnd();
+    }
+  };
+
+  function verificaCoordenadas(lat, lon) {
+    var res = false;
+    if (lat) {
+      res = !(lat == 0);
+      res = res && !(lon == 0);
+      res = res && (lat < 15);
+      res = res && (lat > -6);
+      res = res && (lon > -85);
+      res = res && (lon < -65);
+
+    }
+
+
+    return res;
+  }
+
+  function verificaLatLon(position) {
+    //console.info(position.lat(),position.lng())
+    return verificaCoordenadas(position.lat(), position.lng())
+
+  }
+
+  function replaceAll(text,replaceFor,replaceTo){
+    return text.replace(new RegExp(replaceFor, "g"), replaceTo);
+
+  }
+
+  function refreshCluster(markers, bounds) {
+    var zoom = parseInt(-1, 10);
+    var size = parseInt(-1, 10);
+    var style = parseInt(-1, 10);
+    zoom = zoom == -1 ? null : zoom;
+    size = size == -1 ? null : size;
+    style = style == -1 ? null : style;
+    if (markerClusterer) {
+      markerClusterer.clearMarkers();
+    }
+
+    markerClusterer = new MarkerClusterer(map, markers);
+    map.fitBounds(bounds);
+    //console.info(bounds.toString());
+  }
+
+  function dateFromSlashToBar(date){
+    return (date)?date.replace(new RegExp("/", "g"), "-"):null;
+  }
+  function dateFromBarToSlash(date){
+    return (date)?date.replace(new RegExp("_", "g"), "/"):null;
+  }
+
+  function dateMDY2YMD(date){
+    if(date){
+
+      var MDY = date.split("/");
+      var m = MDY[0];
+      var d = MDY[1];
+      var y = MDY[2];
+
+      var res = y+"-"+("0" + m).slice(-2)+"-"+("0" + d).slice(-2);
+      console.info(date,res);
+      return (m)?res:date;
+    }
+
+
+  }
+
+  function date_MDY2_YMD(date){
+    if(date){
+
+      var MDY = date.split("-");
+      var m = MDY[0];
+      var d = MDY[1];
+      var y = MDY[2];
+
+      var res = y+"-"+("0" + m).slice(-2)+"-"+("0" + d).slice(-2);
+      console.info(date,res);
+      return (m)?res:date;
+    }
+
+
+  }
+
+
+  function dateMDY2_YMD(date){
+    if(date){
+
+      var MDY = date.split("/");
+      var m = MDY[0];
+      var d = MDY[1];
+      var y = MDY[2];
+
+      var res = y+"-"+("0" + m).slice(-2)+"-"+("0" + d).slice(-2);
+      console.info(date,res);
+      return (m)?res:date;
+    }
+
+
+  }
+
+  function dateDMY2YMD(date){
+    if(date){
+      var MDY = date.split("-");
+      console.info(MDY);
+      var m = MDY[1];
+      var d = MDY[0];
+      var y = MDY[2];
+
+      var res = y+"-"+("0" + m).slice(-2)+"-"+("0" + d).slice(-2);
+      console.info(date,res);
+      return (m)?res:date;
+    }
+
+
+  }
+
+
+  function date_YMD2MDY(date){
+    if(date){
+      var MDY = date.split("-");
+      var m = MDY[1];
+      var d = MDY[2];
+      var y = MDY[0];
+
+      var res = ("0" + m).slice(-2)+"/"+("0" + d).slice(-2)+"/"+y;
+      console.info(date,res);
+      return (m)?res:date;
+    }
+
+
+  }
+
+
+  var MdlFilterShape = {
+    shape: null,
+    marker: null,
+    bounds: null,
+    calculateBounds: function () {
+      if (this.shape) {
+        var bounds = null;
+        if (this.shape.getBounds) {
+          bounds = this.shape.getBounds();
+        } else {
+          bounds = new google.maps.LatLngBounds();
+
+          var points = this.shape.getPath().getArray();
+          //console.info(points);
+          var count = points.length;
+          for (var i = 0; i < count; i++) {
+            var punto = points[i];
+            //console.info(punto);
+            bounds.extend(punto);
+          }
+        }
+        //console.info(bounds.toString());
+        this.bounds = bounds;
+      }
+
+    },
+    finishShape: function (polygon) {
+      if (this.shape) {
+        this.shape.setMap(null);
+        this.shape = null;
+      }
+      var handler = function (a) {
+        console.info("evento", a);
+        MdlFilterShape.calculateBounds();
+        if (polygon.getPath) {//es un poligono
+          var path = polygon.getPath();
+          var len = path.length;
+          if (len > 7) {
+            alert("Maximo numero de nodos");
+            path.removeAt(a);
+          }
+        }
+      };
+      var update = function () {
+        var radio = polygon.getRadius();
+        radio = (radio / 1000).toFixed(2);
+        $("#radioCircle").text("Radio del circulo " + radio + " Km");
+        console.info(radio);
+      };
+      var handlerCircle = function () {
+        handler();
+        update();
+      };
+
+      if (polygon.getPath) {//es un poligono
+        google.maps.event.addListener(polygon.getPath(), 'insert_at', handler);
+        google.maps.event.addListener(polygon.getPath(), 'remove_at', handler);
+        google.maps.event.addListener(polygon.getPath(), 'set_at', handler);
+      } else {//es un circulo
+        google.maps.event.addListener(polygon, 'center_changed', handler);
+        google.maps.event.addListener(polygon, 'radius_changed', handlerCircle);
+        update();
+      }
+
+      this.shape = polygon;
+      this.calculateBounds();
+    },
+    createPolygon: function (center) {
+      //this.createMarker(center);
+      var centLat = center.lat();
+      var centLon = center.lng();
+
+      var polyCoords = [
+        new google.maps.LatLng(centLat + 0.05, centLon),
+        new google.maps.LatLng(centLat, centLon - 0.05),
+        new google.maps.LatLng(centLat - 0.05, centLon),
+        new google.maps.LatLng(centLat, centLon + 0.05),
+        new google.maps.LatLng(centLat + 0.05, centLon)
+      ];
+      var polygon = new google.maps.Polygon({
+        paths: polyCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        draggable: true,
+        editable: true
+      });
+
+      polygon.setMap(map);
+
+      this.finishShape(polygon);
+    },
+    createCircle: function (center, radio) {
+
+
+      var polygon = new google.maps.Circle({
+        map: map,
+        clickable: false,
+        editable: true,
+        draggable: true,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        center: center,
+        radius: radio
+      });
+
+      this.finishShape(polygon);
+    },
+    filtro: function (lat, lon) {
+      var res = false;
+      if (this.shape && this.bounds) {
+
+        //console.info(bounds.toString());
+        res = this.bounds.contains(new google.maps.LatLng(lat, lon));
+      }
+      return res;
+    },
+    limpiar: function () {
+      if (!this.shape) {
+        this.shape.setMap(null);
+      }
+      this.shape = null;
+      this.bounds = null;
+    }
+
+  };
+
+</script>
+</body>
+</html>
+
